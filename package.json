@@ -1,0 +1,22 @@
+{
+	"name": "fw.mpa",
+	"version": "0.0.1",
+	"engines": { "node": ">=0.10.0" },
+	"homepage": "https://github.com/LastLeaf/fw.mpa",
+	"repository": { "type": "git", "url": "https://github.com/LastLeaf/fw.mpa.git" },
+	"License": "MIT",
+	"dependencies": {
+		"watch": ">=0.8.0",
+		"mkdirp": ">=0.3.5",
+		"express": ">=3.4.7",
+		"sockjs": ">=0.3.8",
+		"handlebars": ">=1.3.0",
+		"stylus": ">=0.42.0",
+		"mongoose": ">=3.8.4",
+		"connect-mongo": ">=0.4.0",
+		"uglify-js": ">=2.4.8",
+		"uglifycss": ">=0.0.7"
+	},
+	"author": "LastLeaf <bqfu@163.com> http://lastleaf.me",
+	"contributors": []
+}
