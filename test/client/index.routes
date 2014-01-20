@@ -1,0 +1,8 @@
+[
+	"index": {
+		"path": "/",
+		"main": "index.js",
+		"require": ["index.stylus", "index.tmpl"]
+		"reload": "auto"
+	}
+]
