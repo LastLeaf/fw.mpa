@@ -1,8 +1,11 @@
 {
-	"index": {
-		"path": "/",
+	"global": {
+		"require": "http://code.jquery.com/jquery-1.10.1.min.js"
+	},
+	"/": {
+		"parent": "global",
 		"main": "index.js",
 		"require": ["index.stylus", "index.tmpl"],
-		"reload": "auto"
+		"reload": ""
 	}
 }
