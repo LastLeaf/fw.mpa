@@ -1,9 +1,18 @@
 /* Copyright 2014 LastLeaf, LICENSE: github.lastleaf.me/MIT */
 
 .index
-	display absolute
+	position fixed
+	left 0
+	right 0
+	top 0
+	bottom 0
+	text-align center
+.index div
+	position absolute
 	margin auto
 	left 0
 	right 0
 	top 0
 	bottom 0
+	width 100px
+	height 100px
