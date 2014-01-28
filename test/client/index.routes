@@ -1,17 +1,18 @@
 {
 	"global": {
-		"main": "/global.js",
+		"main": "/global",
 		"lib": "http://code.jquery.com/jquery-1.10.1.min.js"
 	},
 	"/": {
 		"parent": "global",
-		"main": "index.js",
-		"tmpl": "index.tmpl",
-		"style": ["index.stylus"],
+		"main": "index",
+		"tmpl": "index",
+		"style": ["index"],
 		"reload": ""
 	},
 	"404": {
 		"parent": "global",
-		"main": "404.js"
+		"main": "404.js",
+		"reload": "none"
 	}
 }
