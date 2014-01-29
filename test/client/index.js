@@ -4,4 +4,6 @@
 var pg = fw.getPage();
 var tmpl = pg.tmpl;
 
-$(document.body).append(tmpl.index('Hello world!'));
+pg.on('load', function(){
+	$(document.body).append(tmpl.index('Hello world!'));
+});

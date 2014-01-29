@@ -4,6 +4,6 @@
 var pg = fw.getPage();
 var tmpl = pg.tmpl;
 
-pg.on('childLoad', function(){
+pg.on('childLoadStart', function(){
 	$('body').html('fw.mpa test!');
 });
