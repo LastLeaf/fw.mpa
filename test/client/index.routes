@@ -10,7 +10,7 @@
 		"style": ["index"],
 		"reload": ""
 	},
-	"404": {
+	"*": {
 		"parent": "global",
 		"main": "404.js",
 		"reload": "none"
