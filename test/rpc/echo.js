@@ -2,7 +2,10 @@
 'use strict';
 
 module.exports = function(app){
-	return function(req, res, data){
-		res.send(data);
+	return function(conn, args, res){
+		res(args);
+		setTimeout(function(){
+			conn.msg('echo', 'Hello world! (alert)');
+		}, 2000);
 	};
 };
