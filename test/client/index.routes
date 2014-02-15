@@ -7,12 +7,10 @@
 		"parent": "global",
 		"main": "index",
 		"tmpl": "index",
-		"style": ["index"],
-		"reload": ""
+		"style": ["index"]
 	},
 	"*": {
 		"parent": "global",
-		"main": "404.js",
-		"reload": "none"
+		"main": "404.js"
 	}
 }

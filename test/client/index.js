@@ -9,6 +9,17 @@ pg.on('load', function(){
 		alert(content);
 	});
 	pg.rpc('/echo', 'Hello world!', function(content){
-		$(document.body).append(tmpl.index(content));
+		var form = $(tmpl.index(content)).appendTo(document.body).find('form')[0];
+		form.page = pg;
+		form.res = function(){
+			$('#speak').val('');
+		};
+		pg.msg('speak', function(text){
+			$('<p>').text(text).appendTo('#words');
+		});
 	});
+});
+
+pg.on('socketConnect', function(){
+	pg.rpc('/chat:reg');
 });

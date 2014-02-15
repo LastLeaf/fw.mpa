@@ -12,6 +12,15 @@ module.exports = {
 		cwd: __dirname,
 	},
 
+	db: {
+		type: 'none',
+		host: 'localhost',
+		port: 27017,
+		user: 'fw',
+		password: 'fwtest',
+		name: 'fw',
+	},
+
 	secret: {
 		cookie: 'test!',
 	},
