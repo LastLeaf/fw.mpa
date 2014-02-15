@@ -67,8 +67,6 @@ var config = {
 require('fw.mpa')(config);
 ```
 
-Notes: 
-
 Now the app should be runnable. There are three run modes for the app: debug, cache, and default.
 
 * Debug mode: the app should always run in this mode while coding and debuging, otherwise the client side code may be cached in browsers. To run in this mode, you should specify environment varible "DEBUG": `DEBUG=1 node app.js`
@@ -106,7 +104,7 @@ Client side javascript code, stylesheets, and templates are placed in `client/`.
 </tmpl>
 ```
 
-Notes: the "fw" attribute in <a> tells the framework to prevent whole page loading when user clicks. ALWAYS have it when the <a> is pointed to another page inside this app or website.
+Notes: the "fw" attribute in &lt;a&gt; tells the framework to prevent whole page loading when user clicks. ALWAYS have it when the &lt;a&gt; is pointed to another page inside this app or website.
 
 ```css
 /* /client/index.stylus */
