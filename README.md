@@ -250,6 +250,7 @@ Client side: the page object (get through `fw.getPage()`).
 * `page.readyState` (Read-Only) The ready state of this page. Remember to check it in async callbacks, because the page may become "unloaded" when async jobs finish.
 * `page.parent` (Read-Only) The parent page object.
 * `page.rpc(func, [args], [callback, [timeoutCallback]])` Make an RPC.
+* `page.form(tag, [callback, [timeoutCallback]])` Send forms inside `tag` as RPC. &lt;form&gt; should be written in templates with "fw", "action" and "method" attributes. "action" and "method" are used to locate the PRC function.
 * `page.msg(event, func)` Bind a function to a server event.
 * `page.msgOff(event, func)` Unbind a function from a server event.
 * `page.routeId` (Read-Only) Get the route name. It may be useful for debugging.

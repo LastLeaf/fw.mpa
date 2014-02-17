@@ -9,7 +9,7 @@ module.exports = function(app){
 			if(typeof(args) !== 'object') return;
 			for(var i in conns)
 				conns[i].msg('speak', conn.username+': '+args.text);
-			res();
+			setTimeout(res, 1000);
 		},
 		reg: function(conn, args, res){
 			if(!conn.username) {
