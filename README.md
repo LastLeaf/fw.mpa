@@ -40,10 +40,11 @@ fw.mpa uses [sockjs](https://github.com/sockjs) as low level connector. It means
 
 fw.mpa apps and websites should be built in an empty project dir. Create it and install framework in it using `npm install fw.mpa`.
 
-Then write a start file. It's usually named `app.js`. The basic content is the fw.mpa configuration. See the example below.
+Then write a configure file (named `config.js`) and a start file (usually `app.js`). See the example below.
 
 ```js
-var config = {
+// /config.js
+module.exports = {
 	app: {
 		title: 'Hello World', // the app's title
 		version: '0.0.1', // the app's version, must change when a new version is deployed
@@ -64,14 +65,17 @@ var config = {
 		cookie: 'This is a RANDOM and SECRET string!', // must keep SECRET!
 	},
 };
-require('fw.mpa')(config);
+```
+```js
+// /app.js
+require('fw.mpa')(__dirname);
 ```
 
 Now the app should be runnable. There are three run modes for the app: debug, cache, and default.
 
-* Debug mode: the app should always run in this mode while coding and debuging, otherwise the client side code may be cached in browsers. To run in this mode, you should specify environment varible "DEBUG": `DEBUG=1 node app.js`
-* Cache mode: the app should better run in this mode on running servers. In this mode, code cache will be dynamically generated. To run in this mode, you should specify environment varible "CACHE": `CACHE=1 node app.js`
-* Default mode: this mode should be used when the running environment is limited. In this mode, framework will never try to write anything to the project dir, which means that you need to provide code cache (the `cache/` generated in cache mode) manually. Just do `node app.js` to run in this mode.
+* Debug mode: the app should always run in this mode while coding and debuging, otherwise the client side code may be cached in browsers. To run in this mode, you should specify environment varible "DEBUG": `FW=DEBUG node app.js`
+* Cache mode: the app should better run in this mode on running servers. In this mode, code cache will be dynamically generated. To run in this mode, you should specify environment varible "CACHE": `FW=CACHE node app.js`
+* Default mode: this mode should be used when the running environment is limited. In this mode, framework will never try to write anything to the project dir, which means that you need to provide code cache (the `cache/` generated in cache mode) manually. The framework itself will not try to restart automatically in this mode. Just do `node app.js` to run in this mode.
 
 ### Dir Structure ###
 

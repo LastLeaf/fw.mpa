@@ -9,7 +9,6 @@ module.exports = {
 
 	server: {
 		port: 1180,
-		cwd: __dirname,
 	},
 
 	db: {
