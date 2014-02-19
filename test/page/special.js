@@ -2,6 +2,8 @@
 
 module.exports = function(app){
 	return function(req, res){
-		res.send('Hello world! (from special page)');
+		app.rpc(req.session, '/echo', 'Hello world! (from special page)', function(r){
+			res.send(r);
+		});
 	};
 };

@@ -84,6 +84,7 @@ In the project dir, create several subdirs for coding.
 * `client/` The client side code including js, css, and templates.
 * `cache/` The client side code cache generated in cache mode. Client side code will be minimized while caching.
 * `rpc/` The server side RPC functions.
+* `module/` Server modules.
 * `render/` The server side rendering code.
 * `page/` The special page code. Special pages are generated on server side.
 * `static/` Static contents. This dir has the top priority. Put static files here and they will be served to clients directly.
@@ -189,6 +190,22 @@ module.exports = function(app){
 
 The first argument of `pg.rpc` is the path of the rpc file and the function need to call in this file.
 
+You can also make server side RPC requests with `app.rpc(...)` when framework is fully loaded.
+
+### Server Modules ###
+
+You can put some code in server modules if you do not want to write them in RPC functions. You can put js files or dirs with `index.js` into `module/`. They will be automatically required when framework inits. An example:
+
+```js
+// /module/hello/index.js
+module.exports = function(app, next){
+	app.hello = 'Hello world! (from modules)';
+	next();
+}
+```
+
+Notes: Only js files and `index.js` inside dirs in `module/` itself (not its child dirs) are loaded by framework.
+
 ### Server-Side Rendering (Optional) ###
 
 fw.mpa allows server side rendering, to provide a initial page for clients without javascript support, and to provide contents for search engines. The sub-pages with server side rendering specified in routes are initially rendered in server side. The render result is passed to its parent (or to framework if it has no parent). The final parent sub-page should provide results like `{title: "the page's title", content: "some html"}`. An example:
@@ -274,11 +291,12 @@ Server side: the app object
 * `app.debug` (Read-Only) Whether server is in debug mode.
 * `app.config` (Read-Only) The fw.mpa configuration.
 * `app.db` An object for visiting database. If database type is set to "mongodb", this is an [mongoose](http://mongoosejs.com/) object. Otherwise, it's null.
+* `app.rpc(session, func, [callback])` Make an RPC from server side. You should provide the session object.
 
 RPC: the conn object (represent a connection from sub-page)
 
-* `conn.msg(event, args)` Send an event to the sub-page. When reconnected, the conn object is rebuilt, so ALWAYS notify servers to use new conn object when reconnected (considering `socketConnect` event of sub-pages).
-* `conn.on(event, func)` Bind a function to an event. Currently there's only a "close" event, trigged when connection is closed.
+* `conn.msg(event, args)` Send an event to the sub-page. When reconnected, the conn object is rebuilt, so ALWAYS notify servers to use new conn object when reconnected (considering `socketConnect` event of sub-pages). Not available from server side (rendering and special pages).
+* `conn.on(event, func)` Bind a function to an event. Currently there's only a "close" event, trigged when connection is closed. Not available from server side (rendering and special pages).
 * `conn.session` The session object. You can write session data here. Session data is shared in connections from one browser.
 * `conn.session.save(callback)` Save session data to the database.
 

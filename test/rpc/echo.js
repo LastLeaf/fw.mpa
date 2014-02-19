@@ -4,8 +4,9 @@
 module.exports = function(app){
 	return function(conn, args, res){
 		res(args);
-		setTimeout(function(){
-			conn.msg('echo', 'Hello world! (alert)');
-		}, 2000);
+		if(conn.msg)
+			setTimeout(function(){
+				conn.msg('echo', app.hello);
+			}, 2000);
 	};
 };
