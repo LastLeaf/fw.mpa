@@ -179,27 +179,25 @@ pg.rpc('/hello/world:alertSomeText', ['a', 'b'], function(res){
 
 ```js
 // /rpc/hello/world.js
-module.exports = function(app){
-    return {
-	    alertSomeText: function(conn, args, res){
-	        res(args.toString());
-	    }
-	};
+module.exports = {
+    alertSomeText: function(conn, args, res){
+        res(args.toString());
+    }
 };
 ```
 
 The first argument of `pg.rpc` is the path of the rpc file and the function need to call in this file.
 
-You can also make server side RPC requests with `app.rpc(...)` when framework is fully loaded.
+You can also make server side RPC requests with `fw.rpc(...)` when framework is fully loaded.
 
 ### Server Modules ###
 
-You can put some code in server modules if you do not want to write them in RPC functions. You can put js files or dirs with `index.js` into `module/`. They will be automatically required when framework inits. An example:
+You can put some code in server modules if you do not want to write them in RPC functions. You can put js files or dirs with `index.js` into `module/`. They will be automatically required when framework inits. You can write something into the `fw` object, but be careful of naming. An example:
 
 ```js
 // /module/hello/index.js
-module.exports = function(app, next){
-	app.hello = 'Hello world! (from modules)';
+module.exports = function(next){
+	fw.hello = 'Hello world! (from modules)';
 	next();
 }
 ```
@@ -238,10 +236,8 @@ fw.mpa allows some special pages (e.g. RSS feeds) generated indepently. The foll
 
 ```js
 // /page/special/page.js
-module.exports = function(app){
-	return function(req, res){
-		res.send('Hello world! (from special page)');
-	};
+module.exports = function(req, res){
+	res.send('Hello world! (from special page)');
 };
 ```
 
@@ -286,14 +282,14 @@ Client side: the page object (get through `fw.getPage()`).
 * Event `unload` The page is unloaded. NOT triggered when the page is hard reload or left. NOT suggested to use (use parent's `childUnload` instead).
 * Event `childUnload` The child page is unloaded. Always triggered after child's `unload`.
 
-Server side: the app object
+Server side: the `fw` object (global.fw).
 
-* `app.debug` (Read-Only) Whether server is in debug mode.
-* `app.config` (Read-Only) The fw.mpa configuration.
-* `app.db` An object for visiting database. If database type is set to "mongodb", this is an [mongoose](http://mongoosejs.com/) object. Otherwise, it's null.
-* `app.rpc(session, func, [callback])` Make an RPC from server side. You should provide the session object.
+* `fw.debug` (Read-Only) Whether server is in debug mode.
+* `fw.config` (Read-Only) The fw.mpa configuration.
+* `fw.db` An object for visiting database. If database type is set to "mongodb", this is an [mongoose](http://mongoosejs.com/) object. Otherwise, it's null.
+* `fw.rpc(session, func, [callback])` Make an RPC from server side. You should provide the session object.
 
-RPC: the conn object (represent a connection from sub-page)
+RPC: the `conn` object (represent a connection from sub-page).
 
 * `conn.msg(event, args)` Send an event to the sub-page. When reconnected, the conn object is rebuilt, so ALWAYS notify servers to use new conn object when reconnected (considering `socketConnect` event of sub-pages). Not available from server side (rendering and special pages).
 * `conn.on(event, func)` Bind a function to an event. Currently there's only a "close" event, trigged when connection is closed. Not available from server side (rendering and special pages).
