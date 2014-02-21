@@ -101,7 +101,7 @@ Currently, special resource contains following files. These files are all option
 Client side javascript code, stylesheets, and templates are placed in `client/`. fw.mpa is binded with [Handlebars](http://handlebarsjs.com/) as template engine and [stylus](http://learnboost.github.io/stylus/) as CSS preprocessor. See examples below.
 
 ```html
-<!-- /client/index.tmpl --!>
+<!-- /client/index.tmpl -->
 <tmpl id="index">
 	<div class="index">{{someText}}</div>
 	<a fw href="/page/not/exists">Goto 404</a>
