@@ -130,25 +130,27 @@ pg.on('load', function(){
 });
 ```
 
+When anything changed in `client/`, you should change your app's version to prevent browser cache when server is not running in debug mode!
+
 ### Routes ###
 
-Routes are the definition of sub-pages. Files with `.routes` extname in `client/` contain all routes. If more than one routes files are found, they will be combined before send to clients. An example:
+Routes are the definition of sub-pages. Files named `routes.js` in `client/` (and its child dirs) contain all routes. If more than one routes files are found, they will be combined before send to clients. Routes files will not be sent to clients directly. An example:
 
-```json
-{
-	"global": {
-		"main": "/global",
-		"lib": "http://code.jquery.com/jquery-1.10.1.min.js"
+```js
+module.exports = {
+	global: {
+		main: "/global",
+		lib: "http://code.jquery.com/jquery-1.10.1.min.js"
 	},
 	"/": {
-		"parent": "global",
-		"main": "index",
-		"tmpl": "index",
-		"style": ["index"]
+		parent: "global",
+		main: "index",
+		tmpl: "index",
+		style: ["index"]
 	},
 	"*": {
-		"parent": "global",
-		"main": "404.js"
+		parent: "global",
+		main: "404.js"
 	}
 }
 ```
@@ -247,7 +249,7 @@ Notes: fw.mpa is based on [express](http://expressjs.com/). See [express documen
 
 Client side: the `fw` object (window.fw).
 
-* `fw.getPage()` Get the current page object. You should ALWAYS use it in the beginning of main js files (NOT in any callbacks in these files).
+* `fw.getPage()` Get the current loading page object. You should ALWAYS use it in the beginning of main js files (NOT in any callbacks in these files).
 * `fw.getArgs()` Get the current page's arguments. For example, when the route '/a/:varA/b/varB' matches the current address '/a/1/b/2', the args are {varA: 1, varB: 2}.
 * `fw.getPath()` Get the current address.
 * `fw.go(where)` Switch page. If `where` is an address, just switch to it. If `where` is a number (+/-n), go fore/back n steps in browser history. Return whether success.
@@ -270,7 +272,7 @@ Client side: the page object (get through `fw.getPage()`).
 * `page.form(tag, [callback, [timeoutCallback]])` Send forms inside `tag` as RPC. &lt;form&gt; should be written in templates with "fw", "action" and "method" attributes. "action" and "method" are used to locate the PRC function.
 * `page.msg(event, func)` Bind a function to a server event.
 * `page.msgOff(event, func)` Unbind a function from a server event.
-* `page.routeId` (Read-Only) Get the route name. It may be useful for debugging.
+* `page.routeId` (Read-Only) Get the route name. Notice that this name is normalized by framework. It may be useful for debugging.
 * `page.on(event, func)` Bind a function to an event. The available events are listed below.
 * Event `childLoadStart` The child page is about to be loaded. Always triggered before child's `load`.
 * Event `render` The child is rendered. Trigged when server rendering is used in the child (before its `load`). The binded function receives an argument representing the rendering result.
@@ -297,7 +299,7 @@ RPC: the `conn` object (represent a connection from sub-page).
 * `conn.session.save(callback)` Save session data to the database.
 
 # Development Status #
-fw.mpa is still in early development. See issues if you are interested.
+fw.mpa is still in early development. See issues if you are interested. It cannot run on Windows currently.
 
 # LICENSE #
 Copyright 2014 LastLeaf, MIT License.
