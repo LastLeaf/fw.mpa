@@ -17,7 +17,7 @@ if(mode === 'DEBUG' || mode === 'CACHE') {
 			if(mode === 'DEBUG') {
 				process.exit(code);
 			} else {
-				setTimeout(createChild, 5000);
+				setTimeout(createChild, 3000);
 			}
 		});
 	};

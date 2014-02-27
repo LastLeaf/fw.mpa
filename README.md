@@ -216,7 +216,7 @@ fw.mpa allows server side rendering, to provide a initial page for clients witho
 
 ```js
 // /render/global.js
-module.exports = function(pg, childResult, res){
+module.exports = function(args, childResult, res){
 	res({
 		title: childResult.title,
 		content: '<p>(from child)</p>' + childResult.content
@@ -294,6 +294,7 @@ Server side: the `fw` object (global.fw).
 * `fw.config` (Read-Only) The fw.mpa configuration.
 * `fw.db` An object for visiting database. If database type is set to "mongodb", this is an [mongoose](http://mongoosejs.com/) object. Otherwise, it's null.
 * `fw.rpc(session, func, [callback])` Make an RPC from server side. You should provide the session object.
+* `fw.restart()` Restart app in debug or cache mode, or simply exit in default mode. Take care when using this method. Notice that every time you modify `config.js`, server will automatically call this method.
 
 RPC: the `conn` object (represent a connection from sub-page).
 
