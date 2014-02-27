@@ -142,7 +142,7 @@ module.exports = {
 		main: "/global",
 		lib: "http://code.jquery.com/jquery-1.10.1.min.js"
 	},
-	"/": {
+	"./": {
 		parent: "global",
 		main: "index",
 		tmpl: "index",
@@ -155,7 +155,11 @@ module.exports = {
 }
 ```
 
-A route is a `name: object` item in routes. The name of a route can be a path (e.g. /path/:var1/and/:var2, can contain vars), "*" (wildcard, 404), or a common string (as identifier). The detailed page definition is listed in the object. The definition can include:
+A route is a `name: object` item in routes.
+
+The name of a route can be a path (relative path recommanded, e.g. `./path/:var1/and/:var2`), a wildcard (404 page, e.g. `./path/*`), or a string identifier (only `[a-z0-9_]+` allowed). You should NEVER use confusing routes.
+
+The detailed page definition is listed in the object. The definition can include:
 
 * `"parent"` The parent sub-page of this sub-page.
 * `"main"` The javascript file(s) that should be excuted while loading.
