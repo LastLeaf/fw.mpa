@@ -13,7 +13,7 @@ Currently, fw.mpa requires node.js and mongodb on server side, and works on majo
 
 Apps and websites based on fw.mpa should follow a _Parent/Child_ page model. This model splits a page into several sub-pages with parent and child relationships. A legal page address is pointed to a child-most sub-page, and every sub-page may have a "parent" sub-page. Parent sub-pages always init before child sub-pages. When a child sub-page need to be switched to another child sub-page, the parent sub-page is not rebuilt.
 
-Here is an clear example to show how this page model works.
+Here is a clear example to show how this page model works.
 
 * The framework keeps a stack which contains the current sub-pages. When framework inits, the stack is inited empty. `stack: []`
 * The page address is pointed to sub-page C. C's parent is B, and B's parent is A. Then A is inited first and pushed into the stack. `stack: [A]`
@@ -269,7 +269,7 @@ Client side: the `fw` object (window.fw).
 
 Client side: the page object (get through `fw.getPage()`).
 
-* `page.tmpl` (Read-Only) The templates. It's an hash from tmpl ID to Handlebars rendering functions.
+* `page.tmpl` (Read-Only) The templates. It's a hash from tmpl ID to Handlebars rendering functions.
 * `page.readyState` (Read-Only) The ready state of this page. Remember to check it in async callbacks, because the page may become "unloaded" when async jobs finish.
 * `page.parent` (Read-Only) The parent page object.
 * `page.rpc(func, [args], [callback, [timeoutCallback]])` Make an RPC.
