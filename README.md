@@ -279,7 +279,7 @@ Client side: the page object (get through `fw.getPage()`).
 * `page.routeId` (Read-Only) Get the route name. Notice that this name is normalized by framework. It may be useful for debugging.
 * `page.on(event, func)` Bind a function to an event. The available events are listed below.
 * Event `childLoadStart` The child page is about to be loaded. Always triggered before child's `load`.
-* Event `render` The child is rendered. Trigged when server rendering is used in the child (before its `load`). The binded function receives an argument representing the rendering result.
+* Event `render` The child is rendered. Trigged when server rendering is needed by descendants (before its `load`). The binded function receives an argument representing the rendering result.
 * Event `load` The page is loaded.
 * Event `childLoadEnd` The child page is loaded. Always triggered after child's `load`.
 * Event `childLoadStop` The child page loading is aborted.
@@ -292,6 +292,8 @@ Server side: the `fw` object (global.fw).
 
 * `fw.debug` (Read-Only) Whether server is in debug mode.
 * `fw.config` (Read-Only) The fw.mpa configuration.
+* `fw.currentLoading` (Read-Only) The current loading file (or dir of server modules) while framework initialing.
+* `fw.loadTmpl(file)` Load a template file. ONLY available while framework initialing, so call it at the beginning of files. The file path is relative to `fw.currentLoading`.
 * `fw.db` An object for visiting database. If database type is set to "mongodb", this is an [mongoose](http://mongoosejs.com/) object. Otherwise, it's null.
 * `fw.rpc(session, func, [callback])` Make an RPC from server side. You should provide the session object.
 * `fw.restart()` Restart app in debug or cache mode, or simply exit in default mode. Take care when using this method. Notice that every time you modify `config.js`, server will automatically call this method.

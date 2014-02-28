@@ -1,23 +1,9 @@
 <!-- Copyright 2014 LastLeaf, LICENSE: github.lastleaf.me/MIT -->
 
 <tmpl id="index">
-	<div class="index">
-		<div>
-			{{this}}
-			<br>
-			<div id="words"></div>
-			<form fw action="/chat" method="speak">
-				<input type="text" id="speak" name="text">
-				<input type="submit" value="Broadcast!">
-			</form>
-			<br>
-			<a fw href="/child/">Wanna visit a child dir?</a>
-			<br>
-			<a fw href="/this/page/does/not/exist">Wanna visit 404?</a>
-			<br>
-			<a fw href="/child/this/page/does/not/exist">Wanna visit 404 in child dir?</a>
-			<br>
-			<a fw href="/special">Go to a special page?</a>
-		</div>
-	</div>
+	<div id="words"></div>
+	<form fw action="/chat" method="speak">
+		<input type="text" id="speak" name="text">
+		<input type="submit" value="Broadcast!">
+	</form>
 </tmpl>

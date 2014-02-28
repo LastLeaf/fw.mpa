@@ -5,5 +5,5 @@ var pg = fw.getPage();
 var tmpl = pg.tmpl;
 
 pg.on('load', function(){
-	$('body').html($('body').html()+'<div class="index">404 Not Found</div><a href="javascript:;" onclick="fw.go(-1)">Go back!</a>');
+	$('#child').html('404 Not Found<br><a href="javascript:;" onclick="fw.go(-1)">Go back!</a>');
 });

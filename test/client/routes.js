@@ -4,13 +4,15 @@
 module.exports = {
 	global: {
 		main: "/global",
-		lib: "http://code.jquery.com/jquery-1.10.1.min.js"
+		lib: "http://code.jquery.com/jquery-1.10.1.min.js",
+		render: "global"
 	},
 	"/": {
 		parent: "global",
 		main: "index",
 		tmpl: "index",
-		style: ["index"]
+		style: ["index"],
+		render: "index"
 	},
 	"*": {
 		parent: "global",

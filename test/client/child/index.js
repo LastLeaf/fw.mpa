@@ -5,5 +5,5 @@ var pg = fw.getPage();
 var tmpl = pg.tmpl;
 
 pg.on('load', function(){
-	$('body').html($('body').html()+'<div class="index">Now you are in a child dir!</div><a href="javascript:;" onclick="fw.go(-1)">Go back!</a>');
+	$('#child').html('You are in a child dir!<br><a href="javascript:;" onclick="fw.go(-1)">Go back!</a>');
 });

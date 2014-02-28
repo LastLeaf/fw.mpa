@@ -8,7 +8,7 @@ if(mode === 'DEBUG' || mode === 'CACHE') {
 	var createChild = function(){
 		var cp = childProcess.fork(__dirname+'/lib/main.js');
 		cp.on('exit', function(code){
-			if(code === 51) {
+			if(code === 250) {
 				// child required a reboot
 				console.log('Will restart soon...');
 				setTimeout(createChild, 1000);

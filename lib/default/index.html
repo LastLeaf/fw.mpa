@@ -4,11 +4,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,user-scalable=0">
 	<title>{{title}}</title>
-	{{styles}}
+	{{#each styles}}<link fw rel="stylesheet" type="text/css" href="{{this}}">{{/each}}
 	<link href="/~rc/favicon.ico{{#if debug}}{{else}}?v={{version}}{{/if}}" rel="icon" type="image/x-icon">
 </head>
 <body>
-	{{content}}
+	{{{content}}}
 	<div id="fw" style="position:absolute;left:0;right:0;top:0;bottom:0;background:#fff;display:none">
 		<img src="/~rc/init.gif{{#if debug}}{{else}}?v={{version}}{{/if}}" alt="" style="display:block;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto">
 	</div>
