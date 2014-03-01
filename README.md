@@ -216,8 +216,8 @@ fw.mpa allows server side rendering, to provide a initial page for clients witho
 
 ```js
 // /render/global.js
-module.exports = function(args, childResult, res){
-	res({
+module.exports = function(conn, args, childResult, next){
+	next({
 		title: childResult.title,
 		content: '<p>(from child)</p>' + childResult.content
 	});
@@ -247,13 +247,13 @@ module.exports = function(req, res){
 };
 ```
 
-Notes: fw.mpa is based on [express](http://expressjs.com/). See [express document](http://expressjs.com/api.html) for the detailed usage of the `req` and `res` argument.
+Notes: fw.mpa is based on [express](http://expressjs.com/). See [express document](http://expressjs.com/api.html) for the detailed usage of the `req` and `res` argument. In addition, a `conn` object is provided as `req.conn`.
 
 ## API List ##
 
 Client side: the `fw` object (window.fw).
 
-* `fw.getPage()` Get the current loading page object. You should ALWAYS use it in the beginning of main js files (NOT in any callbacks in these files).
+* `fw.getPage()` Get the current loading sub-page object. You should ALWAYS use it in the beginning of main js files (NOT in any callbacks in these files).
 * `fw.getArgs()` Get the current page's arguments. For example, when the route '/a/:varA/b/varB' matches the current address '/a/1/b/2', the args are {varA: 1, varB: 2}.
 * `fw.getPath()` Get the current address.
 * `fw.go(where)` Switch page. If `where` is an address, just switch to it. If `where` is a number (+/-n), go fore/back n steps in browser history. Return whether success.
@@ -261,13 +261,14 @@ Client side: the `fw` object (window.fw).
 * `fw.isLoading()` Return switching status.
 * `fw.stopLoading()` Stop loading current page.
 * `fw.uuid()` Generate an UUID.
+* `fw.host` (Read-Only) The host of this page. Equals to `location.host`.
 * `fw.debug` (Read-Only) Whether server is in debug mode.
 * `fw.version` (Read-Only) App or website's version. It's set in fw.mpa configuration.
 * `fw.timeout` (Read-Only) The server timeout. It's set in fw.mpa configuration.
 * `fw.onupgradeneeded` A function to call when server updates (version changed) is detected. In default, it just reload the whole page.
 * `fw.div` (Read-Only) The div used when framework inits. In default, it contains an loading animation. You can use it if you know what it is exactly.
 
-Client side: the page object (get through `fw.getPage()`).
+Client side: the sub-page object (get through `fw.getPage()`).
 
 * `page.tmpl` (Read-Only) The templates. It's a hash from tmpl ID to Handlebars rendering functions.
 * `page.readyState` (Read-Only) The ready state of this page. Remember to check it in async callbacks, because the page may become "unloaded" when async jobs finish.
@@ -295,15 +296,16 @@ Server side: the `fw` object (global.fw).
 * `fw.currentLoading` (Read-Only) The current loading file (or dir of server modules) while framework initialing.
 * `fw.loadTmpl(file)` Load a template file. ONLY available while framework initialing, so call it at the beginning of files. The file path is relative to `fw.currentLoading`.
 * `fw.db` An object for visiting database. If database type is set to "mongodb", this is an [mongoose](http://mongoosejs.com/) object. Otherwise, it's null.
-* `fw.rpc(session, func, [callback])` Make an RPC from server side. You should provide the session object.
+* `fw.rpc(conn, func, [callback])` Make an RPC from server side.
 * `fw.restart()` Restart app in debug or cache mode, or simply exit in default mode. Take care when using this method. Notice that every time you modify `config.js`, server will automatically call this method.
 
-RPC: the `conn` object (represent a connection from sub-page).
+RPC and server side rendering: the `conn` object (represent a connection from sub-page, a rendering request, or a special page request).
 
-* `conn.msg(event, args)` Send an event to the sub-page. When reconnected, the conn object is rebuilt, so ALWAYS notify servers to use new conn object when reconnected (considering `socketConnect` event of sub-pages). Not available from server side (rendering and special pages).
-* `conn.on(event, func)` Bind a function to an event. Currently there's only a "close" event, trigged when connection is closed. Not available from server side (rendering and special pages).
+* `conn.msg(event, args)` Send an event to the sub-page. When reconnected, the conn object is rebuilt, so ALWAYS notify servers to use new conn object when reconnected (considering `socketConnect` event of sub-pages). ONLY available in RPC from clients.
+* `conn.on(event, func)` Bind a function to an event. Currently there's only a "close" event, trigged when connection is closed. ONLY available in RPC from clients.
 * `conn.session` The session object. You can write session data here. Session data is shared in connections from one browser.
 * `conn.session.save(callback)` Save session data to the database.
+* `conn.host` The host (domain name with port) of the calling client.
 
 # Development Status #
 fw.mpa is still in early development. See issues if you are interested. It cannot run on Windows currently.
