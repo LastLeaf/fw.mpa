@@ -249,6 +249,29 @@ module.exports = function(req, res){
 
 Notes: fw.mpa is based on [express](http://expressjs.com/). See [express document](http://expressjs.com/api.html) for the detailed usage of the `req` and `res` argument. In addition, a `conn` object is provided as `req.conn`.
 
+### I18n Support ###
+
+If you want i18n support, add `app.locale` in configuration. An example:
+
+```js
+// /config.js
+module.exports = {
+	app: {
+		locale: ['en', 'zh-CN']
+	}
+}
+```
+
+Then for the templates you want to translate, say `index.tmpl`, create a dir `index.locale` and put translation files in it. Each file is a JSON object:
+
+```json
+{
+	"original text": "translated text"
+}
+```
+
+In `index.tmpl`, mark original texts out using "\`", like "\`original text\`". If you want "\`" it self, use "\`\`", and never put "\`" inside original texts (translate them out!).
+
 ## API List ##
 
 Client side: the `fw` object (window.fw).
@@ -260,6 +283,8 @@ Client side: the `fw` object (window.fw).
 * `fw.redirect(address)` Redirect to another address. This will not leave current address in the history. Return whether success.
 * `fw.isLoading()` Return switching status.
 * `fw.stopLoading()` Stop loading current page.
+* `fw.i18n(str, ...)` Translate `str`.
+* `fw.i18n.n([[str0], str1], [strN], n, ...)` Translate `str` for different forms with number `n`.
 * `fw.uuid()` Generate an UUID.
 * `fw.host` (Read-Only) The host of this page. Equals to `location.host`.
 * `fw.debug` (Read-Only) Whether server is in debug mode.
@@ -271,13 +296,14 @@ Client side: the `fw` object (window.fw).
 Client side: the sub-page object (get through `fw.getPage()`).
 
 * `page.tmpl` (Read-Only) The templates. It's a hash from tmpl ID to Handlebars rendering functions.
-* `page.readyState` (Read-Only) The ready state of this page. Remember to check it in async callbacks, because the page may become "unloaded" when async jobs finish.
+* `page.readyState` (Read-Only) The ready state of this page.
+* `page.destroyed` (Read-Only) Whether this page is destroyed. Remember to check it in async callbacks!
 * `page.parent` (Read-Only) The parent page object.
+* `page.routeId` (Read-Only) Get the route name. Notice that this name is normalized by framework. It may be useful for debugging.
 * `page.rpc(func, [args], [callback, [timeoutCallback]])` Make an RPC.
 * `page.form(tag, [callback, [timeoutCallback]])` Send forms inside `tag` as RPC. &lt;form&gt; should be written in templates with "fw", "action" and "method" attributes. "action" and "method" are used to locate the PRC function.
 * `page.msg(event, func)` Bind a function to a server event.
 * `page.msgOff(event, func)` Unbind a function from a server event.
-* `page.routeId` (Read-Only) Get the route name. Notice that this name is normalized by framework. It may be useful for debugging.
 * `page.on(event, func)` Bind a function to an event. The available events are listed below.
 * Event `childLoadStart` The child page is about to be loaded. Always triggered before child's `load`.
 * Event `render` The child is rendered. Trigged when server rendering is needed by descendants (before its `load`). The binded function receives an argument representing the rendering result.

@@ -4,6 +4,7 @@ module.exports = {
 
 	app: {
 		title: 'fw.mpa test',
+		locale: ['zh']
 	},
 
 	server: {
