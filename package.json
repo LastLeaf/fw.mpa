@@ -1,6 +1,6 @@
 {
 	"name": "fw.mpa",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"engines": { "node": ">=0.10.0" },
 	"homepage": "https://github.com/LastLeaf/fw.mpa",
 	"repository": { "type": "git", "url": "https://github.com/LastLeaf/fw.mpa.git" },
@@ -15,7 +15,8 @@
 		"mongoose": ">=3.8.4",
 		"connect-mongo": ">=0.4.0",
 		"uglify-js": ">=2.4.8",
-		"uglifycss": ">=0.0.7"
+		"uglifycss": ">=0.0.7",
+		"locale": ">=0.0.14"
 	},
 	"author": "LastLeaf <bqfu@163.com> http://lastleaf.me",
 	"contributors": []

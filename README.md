@@ -287,6 +287,8 @@ Client side: the `fw` object (window.fw).
 * `fw.i18n.n([[str0], str1], [strN], n, ...)` Translate `str` for different forms with number `n`.
 * `fw.uuid()` Generate an UUID.
 * `fw.host` (Read-Only) The host of this page. Equals to `location.host`.
+* `fw.language` (Read-Only) The language used for the client. It's one of the `app.locale` in configuration, or an empty string.
+* `fw.selectLanguage([prefer])` Select the language used for the client. A preferred locale can be given, or the framework will auto-select one. This call will trigger a page reload immediately.
 * `fw.debug` (Read-Only) Whether server is in debug mode.
 * `fw.version` (Read-Only) App or website's version. It's set in fw.mpa configuration.
 * `fw.timeout` (Read-Only) The server timeout. It's set in fw.mpa configuration.
@@ -331,7 +333,9 @@ RPC and server side rendering: the `conn` object (represent a connection from su
 * `conn.on(event, func)` Bind a function to an event. Currently there's only a "close" event, trigged when connection is closed. ONLY available in RPC from clients.
 * `conn.session` The session object. You can write session data here. Session data is shared in connections from one browser.
 * `conn.session.save(callback)` Save session data to the database.
-* `conn.host` The host (domain name with port) of the calling client.
+* `conn.host` The host (domain name with port) of the client.
+* `conn.language` (Read-Only) The language used for the client. It's one of the `app.locale` in configuration, or an empty string. NOT available in RPC from clients.
+* `conn.selectLanguage([prefer])` Select the language used for the client. A preferred locale can be given, or the framework will auto-select one. NOT available in RPC from clients.
 
 # Development Status #
 fw.mpa is still in early development. See issues if you are interested. It cannot run on Windows currently.
