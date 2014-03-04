@@ -9,7 +9,7 @@ pg.on('load', function(){
 		alert(content);
 	});
 	pg.rpc('/echo', 'Hello world!', function(content){
-		pg.form($('#speak_form').append(tmpl.index())[0], function(){
+		pg.form($('#speak_form').append(tmpl.index()).find('form')[0], function(){
 			$('#speak').attr('disabled', 1);
 		}, function(){
 			$('#speak').removeAttr('disabled').val('');

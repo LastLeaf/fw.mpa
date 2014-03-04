@@ -48,10 +48,11 @@ module.exports = {
 	app: {
 		title: 'Hello World', // the app's title
 		version: '0.0.1', // the app's version, must change when a new version is deployed
+		loadingLogo: 'loading.gif', // a logo to show when page is loading or switching
+		loadingLogoBackground: '#fff' // the background color of the loading logo
 	},
 	server: {
 		port: 80, // the server port
-		cwd: __dirname, // the project dir, usually __dirname is the right one
 	},
 	db: {
 		type: 'mongodb', // should be "mongodb" if you want to use database
@@ -93,8 +94,8 @@ In the project dir, create several subdirs for coding.
 Currently, special resource contains following files. These files are all optional.
 
 * `rc/favicon.ico` The favicon for this website.
-* `rc/init.gif` The animation shown when framework loading.
-* `rc/index.html` `rc/webapp.html` The framework's start files to override default ones. NEVER write these files unless you know how to write correctly.
+* `rc/loading.gif` The logo to show when loading. The file name is specified in `app.loadingLogo` of the configuration.
+* `rc/index.html` The framework's start files to override default ones. NEVER write these files unless you know how to write correctly.
 
 ### Client Side Code ###
 
@@ -283,8 +284,6 @@ Client side: the `fw` object (window.fw).
 * `fw.redirect(address)` Redirect to another address. This will not leave current address in the history. Return whether success.
 * `fw.isLoading()` Return switching status.
 * `fw.stopLoading()` Stop loading current page.
-* `fw.i18n(str, ...)` Translate `str`.
-* `fw.i18n.n([[str0], str1], [strN], n, ...)` Translate `str` for different forms with number `n`.
 * `fw.uuid()` Generate an UUID.
 * `fw.host` (Read-Only) The host of this page. Equals to `location.host`.
 * `fw.language` (Read-Only) The language used for the client. It's one of the `app.locale` in configuration, or an empty string.
@@ -293,7 +292,8 @@ Client side: the `fw` object (window.fw).
 * `fw.version` (Read-Only) App or website's version. It's set in fw.mpa configuration.
 * `fw.timeout` (Read-Only) The server timeout. It's set in fw.mpa configuration.
 * `fw.onupgradeneeded` A function to call when server updates (version changed) is detected. In default, it just reload the whole page.
-* `fw.div` (Read-Only) The div used when framework inits. In default, it contains an loading animation. You can use it if you know what it is exactly.
+* `fw.loadingLogo.disabled` Whether loading logo is disabled. It's false by default if loading logo is set in configuration.
+* `fw.loadingLogo.opacity(num)` Set the opacity of the loading logo.
 
 Client side: the sub-page object (get through `fw.getPage()`).
 
@@ -303,13 +303,13 @@ Client side: the sub-page object (get through `fw.getPage()`).
 * `page.parent` (Read-Only) The parent page object.
 * `page.routeId` (Read-Only) Get the route name. Notice that this name is normalized by framework. It may be useful for debugging.
 * `page.rpc(func, [args], [callback, [timeoutCallback]])` Make an RPC.
-* `page.form(tag, [callback, [timeoutCallback]])` Send forms inside `tag` as RPC. &lt;form&gt; should be written in templates with "fw", "action" and "method" attributes. "action" and "method" are used to locate the PRC function.
+* `page.form(form, [callback, [timeoutCallback]])` Send &lt;form&gt; as RPC. &lt;form&gt; should be written in templates with "action" and "method" attributes. "action" and "method" are used to locate the PRC function.
 * `page.msg(event, func)` Bind a function to a server event.
 * `page.msgOff(event, func)` Unbind a function from a server event.
 * `page.on(event, func)` Bind a function to an event. The available events are listed below.
 * Event `childLoadStart` The child page is about to be loaded. Always triggered before child's `load`.
 * Event `render` The child is rendered. Trigged when server rendering is needed by descendants (before its `load`). The binded function receives an argument representing the rendering result.
-* Event `load` The page is loaded.
+* Event `load` The page is successfully loaded.
 * Event `childLoadEnd` The child page is loaded. Always triggered after child's `load`.
 * Event `childLoadStop` The child page loading is aborted.
 * Event `socketConnect` A new connection is built for this sub-page. Always triggered after `load`.
