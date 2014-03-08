@@ -40,10 +40,10 @@ fw.mpa uses [sockjs](https://github.com/sockjs) as low level connector. It means
 
 fw.mpa apps and websites should be built in an empty project dir. Create it and install framework in it using `npm install fw.mpa`.
 
-Then write a configure file (named `config.js`) and a start file (usually `app.js`). See the example below.
+Then write a configure file (named `fwconfig.js`) and a start file (usually `app.js`). See the example below.
 
 ```js
-// /config.js
+// /fwconfig.js
 module.exports = {
 	app: {
 		title: 'Hello World', // the app's title
@@ -199,13 +199,13 @@ You can also make server side RPC requests with `fw.rpc(...)` when framework is 
 
 ### Server Modules ###
 
-You can put some code in server modules if you do not want to write them in RPC functions. You can put js files or dirs with `index.js` into `module/`. They will be automatically required when framework inits. You can write something into the `fw` object, but be careful of naming. An example:
+You can put some code in server modules if you do not want to write them in RPC functions. You can put js files or dirs with `index.js` into `module/`. They will be automatically required when framework inits. You can return a value in the callback, and visit through `fw.module(...)` in other server side files. An example:
 
 ```js
 // /module/hello/index.js
 module.exports = function(next){
-	fw.hello = 'Hello world! (from modules)';
-	next();
+	var hello = 'Hello world! (from modules)';
+	next(hello);
 }
 ```
 
@@ -255,7 +255,7 @@ Notes: fw.mpa is based on [express](http://expressjs.com/). See [express documen
 If you want i18n support, add `app.locale` in configuration. An example:
 
 ```js
-// /config.js
+// /fwconfig.js
 module.exports = {
 	app: {
 		locale: ['en', 'zh-CN']
@@ -322,10 +322,11 @@ Server side: the `fw` object (global.fw).
 * `fw.debug` (Read-Only) Whether server is in debug mode.
 * `fw.config` (Read-Only) The fw.mpa configuration.
 * `fw.currentLoading` (Read-Only) The current loading file (or dir of server modules) while framework initialing.
-* `fw.loadTmpl(file)` Load a template file. ONLY available while framework initialing, so call it at the beginning of files. The file path is relative to `fw.currentLoading`.
+* `fw.tmpl(file)` Load a template file. ONLY available while framework initialing, so call it at the beginning of files. The file path is relative to `fw.currentLoading`.
 * `fw.db` An object for visiting database. If database type is set to "mongodb", this is an [mongoose](http://mongoosejs.com/) object. Otherwise, it's null.
+* `fw.module(name)` Get a server module. Returns the return value of the specified server module.
 * `fw.rpc(conn, func, [callback])` Make an RPC from server side.
-* `fw.restart()` Restart app in debug or cache mode, or simply exit in default mode. Take care when using this method. Notice that every time you modify `config.js`, server will automatically call this method.
+* `fw.restart()` Restart app in debug or cache mode, or simply exit in default mode. Take care when using this method. Notice that every time you modify `fwconfig.js`, server will automatically call this method.
 
 RPC and server side rendering: the `conn` object (represent a connection from sub-page, a rendering request, or a special page request).
 

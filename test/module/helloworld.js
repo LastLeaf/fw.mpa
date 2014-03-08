@@ -2,6 +2,6 @@
 'use strict';
 
 module.exports = function(next){
-	fw.hello = 'Hello world! (from modules)';
-	next();
+	var hello = 'Hello world! (from modules)';
+	next(hello);
 };

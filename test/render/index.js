@@ -1,7 +1,7 @@
 // Copyright 2014 LastLeaf, LICENSE: github.lastleaf.me/MIT
 'use strict';
 
-var tmpl = fw.loadTmpl('index.tmpl');
+var tmpl = fw.tmpl('index.tmpl');
 var filename = fw.currentLoading;
 
 module.exports = function(conn, args, childRes, next){
