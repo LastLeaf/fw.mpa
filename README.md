@@ -162,6 +162,7 @@ The name of a route can be a path (relative path recommanded, e.g. `./path/:var1
 
 The detailed page definition is listed in the object. The definition can include:
 
+* `"redirect"` The sub-page that need to be redirected to.
 * `"parent"` The parent sub-page of this sub-page.
 * `"main"` The javascript file(s) that should be excuted while loading.
 * `"lib"` The javascript librarie(s) that should be ready before loading.
