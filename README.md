@@ -188,7 +188,7 @@ pg.rpc('/hello/world:alertSomeText', ['a', 'b'], function(res){
 ```js
 // /rpc/hello/world.js
 module.exports = {
-    alertSomeText: function(conn, args, res){
+    alertSomeText: function(conn, res, args){
         res(args.toString());
     }
 };
@@ -196,7 +196,7 @@ module.exports = {
 
 The first argument of `pg.rpc` is the path of the rpc file and the function need to call in this file.
 
-You can also make server side RPC requests with `fw.rpc(...)` when framework is fully loaded.
+You can also make server side RPC requests with `conn.rpc(...)` when framework is fully loaded.
 
 ### Server Modules ###
 
@@ -303,7 +303,7 @@ Client side: the sub-page object (get through `fw.getPage()`).
 * `page.destroyed` (Read-Only) Whether this page is destroyed. Remember to check it in async callbacks!
 * `page.parent` (Read-Only) The parent page object.
 * `page.routeId` (Read-Only) Get the route name. Notice that this name is normalized by framework. It may be useful for debugging.
-* `page.rpc(func, [args], [callback, [timeoutCallback]])` Make an RPC.
+* `page.rpc(func, [args, ...], [callback, [timeoutCallback]])` Make an RPC.
 * `page.form(form, [callback, [timeoutCallback]])` Send &lt;form&gt; as RPC. &lt;form&gt; should be written in templates with "action" and "method" attributes. "action" and "method" are used to locate the PRC function.
 * `page.msg(event, func)` Bind a function to a server event.
 * `page.msgOff(event, func)` Unbind a function from a server event.
@@ -326,12 +326,12 @@ Server side: the `fw` object (global.fw).
 * `fw.tmpl(file)` Load a template file. ONLY available while framework initialing, so call it at the beginning of files. The file path is relative to `fw.currentLoading`.
 * `fw.db` An object for visiting database. If database type is set to "mongodb", this is an [mongoose](http://mongoosejs.com/) object. Otherwise, it's null.
 * `fw.module(name)` Get a server module. Returns the return value of the specified server module.
-* `fw.rpc(conn, func, [callback])` Make an RPC from server side.
 * `fw.restart()` Restart app in debug or cache mode, or simply exit in default mode. Take care when using this method. Notice that every time you modify `fwconfig.js`, server will automatically call this method.
 
 RPC and server side rendering: the `conn` object (represent a connection from sub-page, a rendering request, or a special page request).
 
-* `conn.msg(event, args)` Send an event to the sub-page. When reconnected, the conn object is rebuilt, so ALWAYS notify servers to use new conn object when reconnected (considering `socketConnect` event of sub-pages). ONLY available in RPC from clients.
+* `conn.rpc(func, [args, ...], [callback])` Make an RPC from server side.
+* `conn.msg(event, [args, ...])` Send an event to the sub-page. When reconnected, the conn object is rebuilt, so ALWAYS notify servers to use new conn object when reconnected (considering `socketConnect` event of sub-pages). ONLY available in RPC from clients.
 * `conn.on(event, func)` Bind a function to an event. Currently there's only a "close" event, trigged when connection is closed. ONLY available in RPC from clients.
 * `conn.session` The session object. You can write session data here. Session data is shared in connections from one browser.
 * `conn.session.save(callback)` Save session data to the database.

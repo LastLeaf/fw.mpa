@@ -5,8 +5,8 @@ var pg = fw.getPage();
 var tmpl = pg.tmpl;
 
 pg.on('load', function(){
-	pg.msg('echo', function(content){
-		alert(content);
+	pg.msg('echo', function(a, b){
+		alert(a+' || '+b);
 	});
 	pg.rpc('/echo', 'Hello world!', function(content){
 		pg.form($('#speak_form').append(tmpl.index()).find('form')[0], function(){

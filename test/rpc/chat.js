@@ -4,13 +4,13 @@
 var conns = {};
 
 module.exports = {
-	speak: function(conn, args, res){
+	speak: function(conn, res, args){
 		if(typeof(args) !== 'object') return;
 		for(var i in conns)
 			conns[i].msg('speak', conn.username+': '+args.text);
 		setTimeout(res, 1000);
 	},
-	reg: function(conn, args, res){
+	reg: function(conn, res, args){
 		if(!conn.username) {
 			conn.username = Math.floor(Math.random()*9000)+1000;
 			conns[conn.username] = conn;
