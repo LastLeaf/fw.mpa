@@ -1,10 +1,10 @@
 // Copyright 2014 LastLeaf, LICENSE: github.lastleaf.me/MIT
 'use strict';
 
-var pg = fw.getPage();
-var tmpl = pg.tmpl;
+fw.main(function(pg){
+	var tmpl = pg.tmpl;
+	console.info(pg);
 
-pg.on('load', function(){
 	pg.msg('echo', function(a, b){
 		alert(a+' || '+b);
 	});
@@ -23,8 +23,8 @@ pg.on('load', function(){
 			$('<p>').text(text).appendTo('#words');
 		});
 	});
-});
 
-pg.on('socketConnect', function(){
-	pg.rpc('/chat:reg');
+	pg.on('socketConnect', function(){
+		pg.rpc('/chat:reg');
+	});
 });

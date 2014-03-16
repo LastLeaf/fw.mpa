@@ -122,9 +122,8 @@ Notes: you can use plain css with the ".css" extname.
 
 ```js
 // /client/index.js
-var pg = fw.getPage();
-var tmpl = pg.tmpl;
-pg.on('load', function(){
+fw.main(function(pg){
+	var tmpl = pg.tmpl;
 	tmpl.index({
 		someText: 'Hello world!'
 	});
@@ -164,7 +163,7 @@ The detailed page definition is listed in the object. The definition can include
 
 * `"redirect"` The sub-page that need to be redirected to.
 * `"parent"` The parent sub-page of this sub-page.
-* `"main"` The javascript file(s) that should be excuted while loading.
+* `"main"` The javascript file(s) that contain(s) main function of this page.
 * `"lib"` The javascript librarie(s) that should be ready before loading.
 * `"tmpl"` The template file(s) needed in this sub-page.
 * `"style"` The css file(s) that should be ready before loading.
@@ -278,7 +277,8 @@ In `index.tmpl`, mark original texts out using "\`", like "\`original text\`". I
 
 Client side: the `fw` object (window.fw).
 
-* `fw.getPage()` Get the current loading sub-page object. You should ALWAYS use it in the beginning of main js files (NOT in any callbacks in these files).
+* `fw.main(func)` Define the main function. The function get a sub-page object.
+* `fw.getPage()` Get the current loading sub-page object.
 * `fw.getArgs()` Get the current page's arguments. For example, when the route '/a/:varA/b/varB' matches the current address '/a/1/b/2', the args are {varA: 1, varB: 2}.
 * `fw.getPath()` Get the current address.
 * `fw.go(where)` Switch page. If `where` is an address, just switch to it. If `where` is a number (+/-n), go fore/back n steps in browser history. Return whether success.
@@ -296,7 +296,7 @@ Client side: the `fw` object (window.fw).
 * `fw.loadingLogo.disabled` Whether loading logo is disabled. It's false by default if loading logo is set in configuration.
 * `fw.loadingLogo.opacity(num)` Set the opacity of the loading logo.
 
-Client side: the sub-page object (get through `fw.getPage()`).
+Client side: the sub-page object.
 
 * `page.tmpl` (Read-Only) The templates. It's a hash from tmpl ID to Handlebars rendering functions.
 * `page.readyState` (Read-Only) The ready state of this page.
@@ -310,7 +310,7 @@ Client side: the sub-page object (get through `fw.getPage()`).
 * `page.on(event, func)` Bind a function to an event. The available events are listed below.
 * Event `childLoadStart` The child page is about to be loaded. Always triggered before child's `load`.
 * Event `render` The child is rendered. Trigged when server rendering is needed by descendants (before its `load`). The binded function receives an argument representing the rendering result.
-* Event `load` The page is successfully loaded.
+* Event `load` The page is successfully loaded. Triggered after main functions.
 * Event `childLoadEnd` The child page is loaded. Always triggered after child's `load`.
 * Event `childLoadStop` The child page loading is aborted.
 * Event `socketConnect` A new connection is built for this sub-page. Always triggered after `load`.
