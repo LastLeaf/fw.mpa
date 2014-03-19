@@ -225,7 +225,7 @@ module.exports = function(conn, args, childResult, next){
 };
 ```
 
-Notes: `pg.rpc(...)` and `pg.tmpl(...)` is usable. See API list below.
+Notes: RPC and templates are usable. See API list below.
 
 When page switches, the child sub-page is rendered on server side, and passed to existed parent page on client side. The parent MUST handles it through the `render` event. An example:
 
@@ -273,6 +273,18 @@ Then for the templates you want to translate, say `index.tmpl`, create a dir `in
 
 In `index.tmpl`, mark original texts out using "\`", like "\`original text\`". If you want "\`" it self, use "\`\`", and never put "\`" inside original texts (translate them out!).
 
+If the original text is not appeared in templates, you can put them in an additional object in locale files. They will be sent to browser side and can be translated using `page.tmpl.i18n(...)`. An example:
+
+```json
+[{
+	"original text": "translated text"
+},{
+	"additional text": "additional translation"
+}]
+```
+
+Translations in the first object cannot be visited by scripts. However, they are efficient because they are just cached in the translated templates when server starts.
+
 ## API List ##
 
 Client side: the `fw` object (window.fw).
@@ -299,6 +311,7 @@ Client side: the `fw` object (window.fw).
 Client side: the sub-page object.
 
 * `page.tmpl` (Read-Only) The templates. It's a hash from tmpl ID to Handlebars rendering functions.
+* `page.tmpl.i18n(text)` The i18n function, translating the provided text.
 * `page.readyState` (Read-Only) The ready state of this page.
 * `page.destroyed` (Read-Only) Whether this page is destroyed. Remember to check it in async callbacks!
 * `page.parent` (Read-Only) The parent page object.
@@ -323,7 +336,7 @@ Server side: the `fw` object (global.fw).
 * `fw.debug` (Read-Only) Whether server is in debug mode.
 * `fw.config` (Read-Only) The fw.mpa configuration.
 * `fw.currentLoading` (Read-Only) The current loading file (or dir of server modules) while framework initialing.
-* `fw.tmpl(file)` Load a template file. ONLY available while framework initialing, so call it at the beginning of files. The file path is relative to `fw.currentLoading`.
+* `fw.tmpl(file)` Load a template file. ONLY available while framework initialing, so call it at the beginning of files. The file path is relative to `fw.currentLoading`. It returns an object containing all template functions. The i18n function is also provided in the returning object.
 * `fw.db` An object for visiting database. If database type is set to "mongodb", this is an [mongoose](http://mongoosejs.com/) object. Otherwise, it's null.
 * `fw.module(name)` Get a server module. Returns the return value of the specified server module.
 * `fw.restart()` Restart app in debug or cache mode, or simply exit in default mode. Take care when using this method. Notice that every time you modify `fwconfig.js`, server will automatically call this method.
