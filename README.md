@@ -178,9 +178,10 @@ Client side can make RPC to server. Server code in `rpc/` will receive and send 
 
 ```js
 // /client/index.js
-var pg = fw.getPage();
-pg.rpc('/hello/world:alertSomeText', ['a', 'b'], function(res){
-    alert(res);
+fw.main(function(pg){
+	pg.rpc('/hello/world:alertSomeText', ['a', 'b'], function(res){
+    	alert(res);
+	});
 });
 ```
 
@@ -193,9 +194,35 @@ module.exports = {
 };
 ```
 
-The first argument of `pg.rpc` is the path of the rpc file and the function need to call in this file.
+The first argument of `pg.rpc` is the path of the rpc file and the function need to call in this file. The server function can respond with the `res` argument, or report an error with `res.err(arg1, arg2, ...)`.
 
 You can also make server side RPC requests with `conn.rpc(...)` when framework is fully loaded.
+
+Middleware is also supported. An example:
+
+```js
+// /client/index.js
+fw.main(function(pg){
+	pg.rpc('/hello/world:middle.func', function(res){
+    	alert(res);
+	});
+});
+```
+
+```js
+// /rpc/hello/world.js
+module.exports = function(conn, res, args){
+	console.log('This is the first middleware.');
+	res.next();
+};
+module.exports.middle = function(conn, res, args){
+	console.log('This is the second middleware.');
+	res.next();
+};
+module.exports.middle.func = function(conn, res, args){
+	res('The middlewares works!');
+};
+```
 
 ### Server Modules ###
 
@@ -231,9 +258,10 @@ When page switches, the child sub-page is rendered on server side, and passed to
 
 ```js
 // /client/global.js
-var pg = fw.getPage();
-pg.on('render', function(childResult){
-	document.body.innerHTML = '<p>(from child)</p>' + childResult;
+fw.main(function(pg){
+	pg.on('render', function(childResult){
+		document.body.innerHTML = '<p>(from child)</p>' + childResult;
+	});
 });
 ```
 
@@ -316,8 +344,8 @@ Client side: the sub-page object.
 * `page.destroyed` (Read-Only) Whether this page is destroyed. Remember to check it in async callbacks!
 * `page.parent` (Read-Only) The parent page object.
 * `page.routeId` (Read-Only) Get the route name. Notice that this name is normalized by framework. It may be useful for debugging.
-* `page.rpc(func, [args, ...], [callback, [timeoutCallback]])` Make an RPC.
-* `page.form(form, [callback, [timeoutCallback]])` Send &lt;form&gt; as RPC. &lt;form&gt; should be written in templates with "action" and "method" attributes. "action" and "method" are used to locate the PRC function.
+* `page.rpc(func, [args, ...], [callback, [errorCallback]])` Make an RPC. Server can respond an error through `res.err`. If there's an timeout error, errorCallback is called with no arguments.
+* `page.form(form, [readyCallback, [callback, [timeoutCallback]]])` Send &lt;form&gt; as RPC. &lt;form&gt; should be written in templates with "action" and "method" attributes. "action" and "method" are used to locate the PRC function.
 * `page.msg(event, func)` Bind a function to a server event.
 * `page.msgOff(event, func)` Unbind a function from a server event.
 * `page.on(event, func)` Bind a function to an event. The available events are listed below.

@@ -3,7 +3,6 @@
 
 fw.main(function(pg){
 	var tmpl = pg.tmpl;
-	console.info(pg);
 
 	pg.msg('echo', function(a, b){
 		alert(a+' || '+b);
