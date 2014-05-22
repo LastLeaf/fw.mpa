@@ -5,14 +5,14 @@
 	<meta name="viewport" content="width=device-width,user-scalable=0">
 	<title>{{title}}</title>
 	{{#each styles}}<link fw rel="stylesheet" type="text/css" href="{{this}}{{#unless ../debug}}?v={{../../version}}{{/unless}}">{{/each}}
-	<link href="/~rc/favicon.ico{{#unless debug}}?v={{version}}{{/unless}}" rel="icon" type="image/x-icon">
+	<link href="/~fw/favicon.ico{{#unless debug}}?v={{version}}{{/unless}}" rel="icon" type="image/x-icon">
 </head>
 <body>
 	{{#if loadingLogo}}<div id="fw" style="position:fixed;z-index:10000;left:0;right:0;top:0;bottom:0;background:{{loadingLogoBackground}};display:none">
-		<img src="/~rc/{{loadingLogo}}{{#unless debug}}?v={{version}}{{/unless}}" alt="" style="display:block;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto">
+		<img src="/~fw/{{loadingLogo}}{{#unless debug}}?v={{version}}{{/unless}}" alt="" style="display:block;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto">
 	</div>{{/if}}
 	<script type="text/javascript">
-		window.fw = { debug:{{debug}}, version:"{{version}}", timeout:"{{timeout}}" }
+		window.fw = { mode:'web', debug:{{debug}}, version:"{{version}}", timeout:"{{timeout}}", auth:"{{auth}}", language:"{{language}}", cacheServer:"{{cacheServer}}".match(/\S+/g), workingServer:"{{workingServer}}".match(/\S+/g) };
 		fw._logo = document.getElementById('fw');
 		if(fw._logo) fw._logo.style.display = 'block';
 	</script>

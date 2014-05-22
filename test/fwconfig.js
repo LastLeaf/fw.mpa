@@ -10,6 +10,7 @@ module.exports = {
 
 	server: {
 		port: 1180,
+		workingServer: ''
 	},
 
 	db: {

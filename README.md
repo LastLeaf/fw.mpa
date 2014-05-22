@@ -332,7 +332,8 @@ Client side: the `fw` object (window.fw).
 * `fw.debug` (Read-Only) Whether server is in debug mode.
 * `fw.version` (Read-Only) App or website's version. It's set in fw.mpa configuration.
 * `fw.timeout` (Read-Only) The server timeout. It's set in fw.mpa configuration.
-* `fw.onserverchanged` A function to call when server updates (version given as first argument) or session losts is detected. In default, it just reload the whole page.
+* `fw.onserverchanged` A function to call when server updates (version given as first argument). In default, it just reload the whole page.
+* `fw.onsessionlost` A function to call when session on server is lost. In default, it just reload the whole page.
 * `fw.loadingLogo.disabled` Whether loading logo is disabled. It's false by default if loading logo is set in configuration.
 * `fw.loadingLogo.opacity(num)` Set the opacity of the loading logo.
 
@@ -376,6 +377,7 @@ RPC and server side rendering: the `conn` object (represent a connection from su
 * `conn.on(event, func)` Bind a function to an event. Currently there's only a "close" event, trigged when connection is closed. ONLY available in RPC from clients.
 * `conn.session` The session object. You can write session data here. Session data is shared in connections from one browser.
 * `conn.session.save(callback)` Save session data to the database.
+* `conn.session.reload(callback)` Reload session data from the database.
 * `conn.host` The host (domain name with port) of the client.
 * `conn.language` (Read-Only) The language used for the client. It's one of the `app.locale` in configuration, or an empty string. NOT available in RPC from clients.
 * `conn.selectLanguage([prefer])` Select the language used for the client. A preferred locale can be given, or the framework will auto-select one. NOT available in RPC from clients.
