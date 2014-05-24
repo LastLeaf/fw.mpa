@@ -3,5 +3,5 @@
 
 fw.main(function(pg){
 	var tmpl = pg.tmpl;
-	$('#child').html('404 Not Found<br><a href="javascript:;" onclick="fw.go(-1)">Go back!</a>');
+	document.getElementById('child').innerHTML = '404 Not Found<br><a href="javascript:;" onclick="fw.go(-1)">Go back!</a>';
 });

@@ -4,17 +4,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,user-scalable=0">
 	<title>{{title}}</title>
-	<link href="fw/favicon.ico{{#unless debug}}?v={{version}}{{/unless}}" rel="icon" type="image/x-icon">
+	<link href="fw/favicon.ico" rel="icon" type="image/x-icon">
 </head>
 <body>
 	{{#if loadingLogo}}<div id="fwLogo" style="position:fixed;z-index:10000;left:0;right:0;top:0;bottom:0;background:{{loadingLogoBackground}};display:none">
-		<img src="fw/{{loadingLogo}}{{#unless debug}}?v={{version}}{{/unless}}" alt="" style="display:block;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto">
+		<img src="fw/{{loadingLogo}}" alt="" style="display:block;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto">
 	</div>{{/if}}
 	<script type="text/javascript">
 		window.fw = { mode:'app', debug:{{debug}}, version:"{{version}}", timeout:"{{timeout}}", language:"{{language}}", cacheServer:"", workingServer:"{{workingServer}}".match(/\S+/) };
 		fw._logo = document.getElementById('fwLogo');
 		if(fw._logo) fw._logo.style.display = 'block';
 	</script>
-	<script type="text/javascript" src="fw/init.js{{#unless debug}}?v={{version}}{{/unless}}"></script>
+	<script type="text/javascript" src="fw/init.js"></script>
 </body>
 </html>

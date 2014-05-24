@@ -7,10 +7,10 @@ fw.main(function(pg){
 	fw.loadingLogo.opacity(0.8);
 
 	pg.on('childUnload', function(){
-		$('#child').html('');
+		document.getElementById('child').innerHTML = '';
 	});
 
 	pg.on('render', function(res){
-		$('#child').html(res.content);
+		document.getElementById('child').innerHTML = res.content;
 	});
 });

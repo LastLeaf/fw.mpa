@@ -7,7 +7,7 @@ fw.mpa is designed to be a real-time web framework suitable for both apps and we
 
 The key idea of this framework is preventing page reloading when page switches. It's slightly similar to _PJAX_, but the framework manages the browser history and providing an page model that is easy to understand.
 
-Currently, fw.mpa requires node.js and mongodb on server side, and works on major browsers.
+Currently, fw.mpa requires node.js on server side, and works on major browsers.
 
 ### Page Model ###
 
@@ -55,7 +55,7 @@ module.exports = {
 		port: 80, // the server port
 	},
 	db: {
-		type: 'mongodb', // should be "mongodb" if you want to use database
+		type: 'mongoose', // should be "mongoose" if you want to use database
 		host: 'localhost', // here's some database configuration
 		port: 27017,
 		user: '',
@@ -366,7 +366,7 @@ Server side: the `fw` object (global.fw).
 * `fw.config` (Read-Only) The fw.mpa configuration.
 * `fw.currentLoading` (Read-Only) The current loading file (or dir of server modules) while framework initialing.
 * `fw.tmpl(file)` Load a template file. ONLY available while framework initialing, so call it at the beginning of files. The file path is relative to `fw.currentLoading`. It returns an object containing all template functions. The i18n function is also provided in the returning object.
-* `fw.db` An object for visiting database. If database type is set to "mongodb", this is an [mongoose](http://mongoosejs.com/) object. Otherwise, it's null.
+* `fw.db` An object for visiting database. If database type is set to "mongoose", this is an [mongoose](http://mongoosejs.com/) object. Otherwise, it's null.
 * `fw.module(name)` Get a server module. Returns the return value of the specified server module.
 * `fw.restart()` Restart app in debug or cache mode, or simply exit in default mode. Take care when using this method. Notice that every time you modify `fwconfig.js`, server will automatically call this method.
 
