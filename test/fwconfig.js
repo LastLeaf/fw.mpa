@@ -5,12 +5,15 @@ module.exports = {
 	app: {
 		title: 'fw.mpa test',
 		locale: ['zh'],
+	},
+
+	client: {
 		loadingLogo: 'loading.gif'
 	},
 
 	server: {
 		port: 1180,
-		workingServer: ''
+		workingServer: 'http://127.0.0.1:1180',
 	},
 
 	db: {

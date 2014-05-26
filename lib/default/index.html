@@ -2,21 +2,22 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,user-scalable=0">
+	{{#each meta}}<meta name="{{@key}}" content="{{this}}">{{/each}}
 	<title>{{title}}</title>
 	{{#each styles}}<link fw rel="stylesheet" type="text/css" href="{{this}}{{#if ../debug}}?t={{../../timestamp}}{{else}}?v={{../../version}}{{/if}}">{{/each}}
 	<link href="/~fw/favicon.ico{{#if debug}}?t={{timestamp}}{{else}}?v={{version}}{{/if}}" rel="icon" type="image/x-icon">
 </head>
 <body>
-	{{#if loadingLogo}}<div id="fwLogo" style="position:fixed;z-index:10000;left:0;right:0;top:0;bottom:0;background:{{loadingLogoBackground}};display:none">
+	{{#if loadingLogo}}<div fw style="position:fixed;z-index:10000;left:0;right:0;top:0;bottom:0;background:{{loadingLogoBackground}};display:none">
 		<img src="/~fw/{{loadingLogo}}{{#if debug}}?t={{timestamp}}{{else}}?v={{version}}{{/if}}" alt="" style="display:block;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto">
 	</div>{{/if}}
-	<script type="text/javascript">
-		window.fw = { mode:'web', debug:{{debug}}, version:"{{version}}", timeout:"{{timeout}}", auth:"{{auth}}", language:"{{language}}", cacheServer:"{{cacheServer}}".match(/\S+/g), workingServer:"{{workingServer}}".match(/\S+/g) };
-		fw._logo = document.getElementById('fwLogo');
+	<script fw type="text/javascript">
+		window.fw = { mode:'web', debug:{{debug}}, version:'{{version}}', timeout:'{{timeout}}', auth:'{{auth}}', language:'{{language}}', cacheServer:'{{cacheServer}}'.match(/\S+/g), workingServer:'{{workingServer}}'.match(/\S+/g) };
+		for(fw._logo=document.body.childNodes[0]; fw._logo; fw._logo=fw._logo.nextSibling)
+			if(fw._logo.getAttribute && fw._logo.getAttribute('fw') === '') break;
 		if(fw._logo) fw._logo.style.display = 'block';
 	</script>
-	<script type="text/javascript" src="/~fw/init.js{{#if debug}}?t={{timestamp}}{{else}}?v={{version}}{{/if}}"></script>
-	<div class="fw">{{{content}}}</div>
+	<script fw type="text/javascript" src="/~fw/init.js{{#if debug}}?t={{timestamp}}{{else}}?v={{version}}{{/if}}"></script>
+	{{{content}}}
 </body>
 </html>

@@ -10,7 +10,9 @@ You can also put the generated code in [Cordova](http://cordova.apache.org/). It
 
 In cache mode, a `webapp.html` is generated with the code cache. It's the web-app start file. If everything goes well, you can directly open it in the browser (in file:// protocol).
 
-The whole `cache/` is the web-app (you may rename the `webapp.html` to `index.html`). It may be difficult to debug, for the code is minified. You can just debug in common website mode.
+The whole `cache/` is the web-app (you may rename the `webapp.html` to `index.html`). If you need to load some files from `static/`, copy them to the `cache/` when you package your app. It may be difficult to debug, for the code is minified. You can just debug in common website mode.
+
+Notes: the path in routes will never conflict with the static resource URLs. Don't worry about that.
 
 ### Extra Work Needed for Web-App ###
 

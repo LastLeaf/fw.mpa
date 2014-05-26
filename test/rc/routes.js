@@ -3,7 +3,7 @@
 
 module.exports = {
 	global: {
-		main: "/global",
+		main: "global",
 		lib: "http://code.jquery.com/jquery-1.10.1.min.js",
 		render: "global"
 	},

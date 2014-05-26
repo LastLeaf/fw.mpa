@@ -2,7 +2,7 @@
 
 ## Guide - Routing ##
 
-Routes are the definition of sub-pages. Files named `routes.js` in `client/` (and its child dirs) contain all routes. If more than one routes files are found, they will be combined before send to clients. Routes files will not be sent to clients directly. An example:
+Routes are the definition of sub-pages. Files named `routes.js` in `rc/` (and its descendents) contain all routes. If more than one routes files are found, they will be combined before send to clients. Routes files will not be sent to clients directly. An example:
 
 ```js
 module.exports = {
@@ -27,6 +27,8 @@ A route is a `name: object` item in routes.
 
 The name of a route can be a path (relative path recommanded, e.g. `./path/:var1/and/:var2`), a wildcard (404 page, e.g. `./path/*`), or a string identifier (only `[a-z0-9_]+` allowed). You should NEVER use confusing routes.
 
+Notes: the ".js" of javascript files, ".stylus" of stylus files, and ".tmpl" of template files can be omitted. Paths are relative to the corresponding location in `client/` or `render/` of routes file's location, unless there's "/" in front-most (which means relative to `client/` or `render/`).
+
 The detailed page definition is listed in the object. The definition can include:
 
 * `"redirect"` The sub-page that need to be redirected to.
@@ -37,5 +39,3 @@ The detailed page definition is listed in the object. The definition can include
 * `"style"` The css file(s) that should be ready before loading.
 * `"render"` The server side rendering file.
 * `"reload"` An option to force page reloading when switch in or out this sub-page. Its value can be "in", "out", or "both".
-
-Notes: the ".js" of javascript files, ".stylus" of stylus files, and ".tmpl" of template files can be omitted. Paths are relative to the routes file location, unless there's "/" in front-most (which means relative to `client/`).

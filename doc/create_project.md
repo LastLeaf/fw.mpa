@@ -14,6 +14,8 @@ module.exports = {
 	app: {
 		title: 'Hello World', // the app's title
 		version: '0.0.1', // the app's version, must change when a new version is deployed
+	},
+	client: {
 		loadingLogo: 'loading.gif', // a logo to show when page is loading or switching
 		loadingLogoBackground: '#fff' // the background color of the loading logo
 	},
@@ -57,7 +59,6 @@ Currently, special resource contains following files. These files are all option
 
 * `rc/favicon.ico` The favicon for this website.
 * `rc/loading.gif` The logo to show when loading. The file name is specified in `app.loadingLogo` of the configuration.
-* `rc/index.html` The framework's start files to override default ones. NEVER write these files unless you know how to write correctly.
 
 ### Running Modes ###
 
