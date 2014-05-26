@@ -53,10 +53,11 @@ In the project dir, create several subdirs for coding.
 * `render/` The server side rendering code.
 * `page/` The special page code. Special pages are generated on server side.
 * `static/` Static contents. This dir has the top priority. Put static files here and they will be served to clients directly.
-* `rc/` Some special resource used by the framework, described below.
+* `rc/` Routes and some special files used by the framework, described below.
 
-Currently, special resource contains following files. These files are all optional.
+Currently, `rc/` contains following files.
 
+* `rc/routes.js` The routes. Descendents of `rc/` can also contains routes.
 * `rc/favicon.ico` The favicon for this website.
 * `rc/loading.gif` The logo to show when loading. The file name is specified in `app.loadingLogo` of the configuration.
 
