@@ -4,8 +4,6 @@
 fw.main(function(pg){
 	var tmpl = pg.tmpl;
 
-	fw.loadingLogo.opacity(0.8);
-
 	pg.on('childUnload', function(){
 		document.getElementById('child').innerHTML = '';
 	});

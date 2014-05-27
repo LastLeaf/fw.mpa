@@ -19,5 +19,6 @@ Notes: the path in routes will never conflict with the static resource URLs. Don
 There is some extra work to make the web-app running. Make sure you know the following things.
 
 * The working server configuration (server.workingServer) should not be left default. The web-app need the server's address for RPC requests.
+* Implement the `fw.onserverchanged` event handler. In default, you are not allowed to connect to the RPC server when the server is updated. If you want to ignore the updates, set `fw.version` to the latest version (provided to the handler as the first argument).
 * Use server-side rendering as less as you can. It has no meaning for the web-app. What's worse, it blocks the app's rendering when the device is offline.
 * A link to a special page will lead to an online web page on the working server, and could not go back unless using history.go() in the special pages.

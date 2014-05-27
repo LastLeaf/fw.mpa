@@ -2,6 +2,8 @@
 
 ## Guide - Client Side Code ##
 
+### Client Coding ###
+
 Client side javascript code, stylesheets, and templates are placed in `client/`. fw.mpa is binded with [Handlebars](http://handlebarsjs.com/) as template engine and [stylus](http://learnboost.github.io/stylus/) as CSS preprocessor. See examples below.
 
 ```html
@@ -34,3 +36,9 @@ fw.main(function(pg){
 ```
 
 When anything changed in `client/`, you should change your app's version to prevent browser cache when server is not running in debug mode!
+
+### Code Caching and Compression ###
+
+In cache mode, your code is auto-compressed. Special routing settings can also combine your code automatically. 
+
+However, compression is slow. Compressing big libraries such as jQuery will take several seconds. You can provide a compressed version for each js/css file individually, by naming it like ".min.js" or ".min.css".

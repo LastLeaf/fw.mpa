@@ -19,7 +19,7 @@ Client side: the `fw` object (window.fw).
 * `fw.debug` (Read-Only) Whether server is in debug mode.
 * `fw.timeout` (Read-Only) The server timeout. It's set in fw.mpa configuration.
 * `fw.version` App or website's version (set in fw.mpa configuration), loaded when framework inits. It's almost read-only, but if you want the client side code to ignore the server code changes, you can modify it to the server's latest version.
-* `fw.onserverchanged` A function to call when server code updates (server's latest version given as first argument). In default, it just reload the whole page.
+* `fw.onserverchanged` A function to call when server code updates (server's latest version given as first argument). In default, it just reload the whole page in web mode, and do nothing in app mode.
 * `fw.onsessionlost` A function to call when session information on the server is lost. In default, it just reload the whole page.
 * `fw.loadingLogo.disabled` Whether loading logo is disabled. It's false by default if loading logo is set in configuration.
 * `fw.loadingLogo.opacity(num)` Set the opacity of the loading logo.
