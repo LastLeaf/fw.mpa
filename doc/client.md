@@ -8,11 +8,16 @@ Client side javascript code, stylesheets, and templates are placed in `client/`.
 
 ```html
 <!-- /client/index.tmpl -->
+<!-- a Handlebars template -->
 <tmpl id="index">
 	<div class="index">{{someText}}</div>
 	<a fw href="/page/not/exists">Goto 404</a>
 	<a fw href="/special">Goto Special Page</a>
 </tmpl>
+<!-- a pure JSON object -->
+<json id="error">{
+	"timeout": "Timed out."
+}</json>
 ```
 
 Notes: the "fw" attribute in &lt;a&gt; tells the framework to prevent whole page loading when user clicks. ALWAYS have it when the &lt;a&gt; is pointed to another page inside this app or website.
