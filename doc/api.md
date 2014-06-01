@@ -26,7 +26,7 @@ Client side: the `fw` object (window.fw).
 
 Client side: the sub-page object.
 
-* `page.tmpl` (Read-Only) The templates. It's a hash from tmpl ID to Handlebars rendering functions.
+* `page.tmpl` (Read-Only) The templates. It's a hash from tmpl ID to Handlebars rendering functions (and json objects in the tmpl file).
 * `page.tmpl.i18n(text)` The i18n function, translating the provided text.
 * `page.readyState` (Read-Only) The ready state of this page.
 * `page.destroyed` (Read-Only) Whether this page is destroyed. Remember to check it in async callbacks!
@@ -52,7 +52,7 @@ Server side: the `fw` object (global.fw).
 * `fw.debug` (Read-Only) Whether server is in debug mode.
 * `fw.config` (Read-Only) The fw.mpa configuration.
 * `fw.currentLoading` (Read-Only) The current loading file (or dir of server modules) while framework initialing.
-* `fw.tmpl(file)` Load a template file. ONLY available while framework initialing, so call it at the beginning of files. The file path is relative to `fw.currentLoading`. It returns an object containing all template functions. The i18n function is also provided in the returning object.
+* `fw.tmpl(file)` Load a template file. ONLY available while framework initialing, so call it at the beginning of files. The file path is relative to `fw.currentLoading`. It returns templates constructor which requires an `conn` object as the first argument to create templates. The templates containing all template functions (and json objects in the tmpl file). The i18n function is also provided.
 * `fw.db` An object for visiting database. If database type is set to "mongoose", this is an [mongoose](http://mongoosejs.com/) object. Otherwise, it's null.
 * `fw.module(name)` Get a server module. Returns the return value of the specified server module.
 * `fw.restart()` Restart app in debug or cache mode, or simply exit in default mode. Take care when using this method. Notice that every time you modify `fwconfig.js`, server will automatically call this method.
