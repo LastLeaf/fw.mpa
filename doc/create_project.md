@@ -58,8 +58,8 @@ In the project dir, create several subdirs for coding.
 Currently, `rc/` contains following files.
 
 * `rc/routes.js` The routes. Descendents of `rc/` can also contains routes.
-* `rc/favicon.ico` The favicon for this website.
-* `rc/loading.gif` The logo to show when loading. The file name is specified in `app.loadingLogo` of the configuration.
+* `rc/favicon.ico` The favicon for this website. The file name is specified in `client.loadingLogo` of the configuration.
+* `rc/loading.gif` The logo to show when loading. The file name is specified in `client.loadingLogo` of the configuration.
 
 ### Running Modes ###
 

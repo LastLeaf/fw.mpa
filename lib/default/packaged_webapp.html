@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	{{#each meta}}<meta name="{{@key}}" content="{{this}}">{{/each}}
 	<title>{{title}}</title>
-	<link href="fw/favicon.ico" rel="icon" type="image/x-icon">
+	{{#if favicon}}<link href="fw/{{favicon}}" rel="icon" type="image/x-icon">{{/if}}
 </head>
 <body>
 	{{#if loadingLogo}}<div fw style="position:fixed;z-index:10000;left:0;right:0;top:0;bottom:0;background:{{loadingLogoBackground}};display:none">
