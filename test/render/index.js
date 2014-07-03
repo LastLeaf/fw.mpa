@@ -6,6 +6,6 @@ var filename = fw.currentLoading;
 
 module.exports = function(conn, args, childRes, next){
 	childRes.title = filename;
-	childRes.content = tmpl.index(conn, 'Hello world! (from render)');
+	childRes.content = tmpl(conn).index('Hello world! (from render)');
 	next(childRes);
 };
