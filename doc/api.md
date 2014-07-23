@@ -63,8 +63,11 @@ RPC and server side rendering: the `conn` object (represent a connection from su
 * `conn.msg(event, [args, ...])` Send an event to the sub-page. When reconnected, the conn object is rebuilt, so ALWAYS notify servers to use new conn object when reconnected (considering `socketConnect` event of sub-pages). ONLY available in RPC from clients.
 * `conn.on(event, func)` Bind a function to an event. Currently there's only a "close" event, trigged when connection is closed. ONLY available in RPC from clients.
 * `conn.session` The session object. You can write session data here. Session data is shared in connections from one browser.
+* `conn.session.id` (Read-Only) The session ID.
 * `conn.session.save(callback)` Save session data to the database.
 * `conn.session.reload(callback)` Reload session data from the database.
-* `conn.host` The host (domain name with port) of the client.
+* `conn.host` (Read-Only) The host (domain name with port) requested by the client.
+* `conn.ip` (Read-Only) The remote address of the client.
+* `conn.headers` (Read-Only) The request headers. You can read user-agent from here.
 * `conn.language` (Read-Only) The language used for the client. It's one of the `app.locale` in configuration, or an empty string. NOT available in RPC from clients.
 * `conn.selectLanguage([prefer])` Select the language used for the client. A preferred locale can be given, or the framework will auto-select one. NOT available in RPC from clients.
