@@ -63,10 +63,11 @@ Currently, `rc/` contains following files.
 
 ### Running Modes ###
 
-Now the app should be runnable. There are several run modes for an app. Basic run modes include debug, cache, and default.
+Now the app should be runnable. There are several running modes for an app. Basic modes include debug, cache, run, and default.
 
 * Debug mode: the app should always run in this mode while coding and debuging, otherwise the client side code may be cached in browsers. To run in this mode, you should specify environment variable "DEBUG": `FW=DEBUG node app.js`
-* Cache mode: the app should better run in this mode on running servers. In this mode, code cache will be dynamically generated. To run in this mode, you should specify environment variable "CACHE": `FW=CACHE node app.js`
+* Cache mode: In this mode, code cache will be dynamically generated. Your app will be automatically re-cached and restarted when `fwconfig.js` changed. If app exits unexpectedly, it will be auto-restarted. To run in this mode, you should specify environment variable "CACHE": `FW=CACHE node app.js`
+* Run mode: In this mode, your app will be auto-restarted when it exits unexpectedly. This mode is suitable for productional servers if you have the cache generated in development environment. To run in this mode, you should specify environment variable "CACHE": `FW=RUN node app.js`
 * Default mode: this mode should be used when the running environment is limited. In this mode, framework will never try to write anything to the project dir, which means that you need to provide code cache (the `cache/` generated in cache mode) manually. The framework itself will not try to restart automatically in this mode. Just do `node app.js` to run in this mode.
 
 ### Code Cache and Static Content Server ###
