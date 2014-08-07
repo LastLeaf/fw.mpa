@@ -25,6 +25,9 @@ if(mode === 'DEBUG' || mode === 'CACHE') {
 		if(basepath) process.chdir(basepath);
 		createChild();
 	};
+} else if(mode === 'LOCALE') {
+	// locale generation mode
+	module.exports = require(__dirname+'/lib/gen_locale.js');
 } else {
 	// limited mode
 	module.exports = function(basepath){

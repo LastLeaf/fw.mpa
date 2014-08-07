@@ -63,7 +63,7 @@ Currently, `rc/` contains following files.
 
 ### Running Modes ###
 
-Now the app should be runnable. There are three run modes for the app: debug, cache, and default.
+Now the app should be runnable. There are several run modes for an app. Basic run modes include debug, cache, and default.
 
 * Debug mode: the app should always run in this mode while coding and debuging, otherwise the client side code may be cached in browsers. To run in this mode, you should specify environment variable "DEBUG": `FW=DEBUG node app.js`
 * Cache mode: the app should better run in this mode on running servers. In this mode, code cache will be dynamically generated. To run in this mode, you should specify environment variable "CACHE": `FW=CACHE node app.js`
