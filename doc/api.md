@@ -10,6 +10,7 @@ Client side: the `fw` object (window.fw).
 * `fw.getPath()` Get the current address.
 * `fw.go(where)` Switch page. If `where` is an address, just switch to it. If `where` is a number (+/-n), go fore/back n steps in browser history. Return whether success.
 * `fw.redirect(address)` Redirect to another address. This will not leave current address in the history. Return whether success.
+* `fw.open(address)` Open address in another window or tab. 
 * `fw.isLoading()` Return switching status.
 * `fw.stopLoading()` Stop loading current page.
 * `fw.uuid()` Generate an UUID.
