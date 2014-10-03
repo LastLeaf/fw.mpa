@@ -14,6 +14,19 @@ module.exports = function(conn, args, childResult, next){
 };
 ```
 
+You can also specify the HTTP status code and extra head html content (e.g. the rss links).
+
+```js
+// /render/global.js
+module.exports = function(conn, args, childResult, next){
+	next({
+		statusCode: 404,
+		extraHead: '<!-- this is a comment in head -->',
+		title: 'This Page does not Exists'
+	});
+};
+```
+
 Notes: RPC and templates are usable. See API list.
 
 When page switches, the child sub-page is rendered on server side, and passed to existed parent page on client side. The parent MUST handles it through the `render` event. An example:

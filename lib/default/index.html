@@ -6,6 +6,7 @@
 	<title>{{title}}</title>
 	{{#each styles}}<link fw rel="stylesheet" type="text/css" href="{{this}}{{#if ../debug}}?t={{../../timestamp}}{{else}}?v={{../../version}}{{/if}}">{{/each}}
 	{{#if favicon}}<link href="/~fw/{{favicon}}{{#if debug}}?t={{timestamp}}{{else}}?v={{version}}{{/if}}" rel="icon" type="image/x-icon">{{/if}}
+	{{{extraHead}}}
 	<script fw type="text/javascript">
 		window.fw = { mode:'web', debug:{{debug}}, version:'{{version}}', timeout:'{{timeout}}', auth:'{{auth}}', language:'{{language}}', cacheServer:'{{cacheServer}}'.match(/\S+/g), workingServer:'{{workingServer}}'.match(/\S+/g) };
 	</script>
