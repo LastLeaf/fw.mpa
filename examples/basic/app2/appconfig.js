@@ -2,12 +2,13 @@
 'use strict';
 
 module.exports = {
-	"./": {
-		parent: "global",
-		main: "index"
+
+	app: {
+		title: 'basic example - app 2',
 	},
-	"*": {
-		parent: "global",
-		main: "404.js"
-	}
+
+	secret: {
+		cookie: 'LONG RANDOM STRING',
+	},
+
 };
