@@ -5,4 +5,5 @@ module.exports = {
 	ip: '',
 	port: 1180,
 	websocket: true,
+	app: ['app1/app.js', 'app2/app.js'],
 };

@@ -4,7 +4,7 @@
 var appconfig = require('./appconfig.js');
 
 module.exports = function(app){
-	app.config(appconfig);
-	app.dir('client', __dirname + 'client');
+	app.setConfig(appconfig);
+	app.bindDir('client', '/', __dirname + '/client');
 	app.start();
 };

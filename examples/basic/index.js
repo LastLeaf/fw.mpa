@@ -6,4 +6,4 @@ var fw = require('../../index.js');
 var fwconfig = require('./fwconfig.js');
 
 // start with two apps
-fw(fwconfig, 'app1/app.js', 'app2/app.js');
+fw(fwconfig);
