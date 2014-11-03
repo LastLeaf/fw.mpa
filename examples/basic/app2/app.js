@@ -2,9 +2,11 @@
 'use strict';
 
 var appconfig = require('./appconfig.js');
+var routes = require('./routes.js');
 
 module.exports = function(app){
 	app.setConfig(appconfig);
 	app.bindDir('client', '/', __dirname + '/client');
+	app.setRoutes(routes);
 	app.start();
 };
