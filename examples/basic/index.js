@@ -6,4 +6,5 @@ var fw = require('../../index.js');
 var fwconfig = require('./fwconfig.js');
 
 // start with two apps
+process.chdir(__dirname);
 fw(fwconfig);
