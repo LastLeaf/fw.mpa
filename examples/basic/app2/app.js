@@ -7,6 +7,6 @@ var routes = require('./routes.js');
 module.exports = function(app){
 	app.setConfig(appconfig);
 	app.bindDir('client', '/', __dirname + '/client');
-	app.setRoutes(routes);
+	app.route.setList(routes);
 	app.start();
 };
