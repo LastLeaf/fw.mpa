@@ -7,6 +7,10 @@ module.exports = {
 		title: 'basic example - app 2',
 	},
 
+	client: {
+		cache: __dirname + '/cache'
+	},
+
 	secret: {
 		cookie: 'LONG RANDOM STRING',
 	},
