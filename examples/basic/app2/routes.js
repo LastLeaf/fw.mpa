@@ -3,5 +3,5 @@
 
 module.exports = {
 	global: {},
-	'*': { main: 'index.js' }
+	'*': { parent: 'global', main: 'index.js' }
 };

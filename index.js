@@ -1,6 +1,7 @@
 // Copyright 2014 LastLeaf, LICENSE: github.lastleaf.me/MIT
 'use strict';
 
+var childProcess = require('child_process');
 var utils = require('./lib/utils.js');
 var fwconfigDefault = require('./lib/default/fwconfig.js');
 
@@ -15,7 +16,6 @@ module.exports = function(fwconfig){
 	// start process
 	if(mode === 'debug' || mode === 'cache') {
 		// debug or cache mode
-		var childProcess = require('child_process');
 		var createChild = function(){
 			var cp = childProcess.fork(__dirname+'/lib/main.js');
 			cp.on('exit', function(code, signal){
@@ -32,32 +32,22 @@ module.exports = function(fwconfig){
 				}
 			});
 		};
-		module.exports = function(basepath){
-			if(basepath) process.chdir(basepath);
-			createChild();
-		};
+		createChild();
 	} else if(mode === 'run') {
 		// run mode
-		var childProcess = require('child_process');
 		var createChild = function(){
 			var cp = childProcess.fork(__dirname+'/lib/main.js');
 			cp.on('exit', function(code){
 				setTimeout(createChild, 1000);
 			});
 		};
-		module.exports = function(basepath){
-			if(basepath) process.chdir(basepath);
-			createChild();
-		};
+		createChild();
 	} else if(mode === 'locale') {
 		// locale generation mode
-		module.exports = require(__dirname+'/lib/gen_locale.js');
+		require(__dirname+'/lib/gen_locale.js');
 	} else {
 		// limited mode
-		module.exports = function(basepath){
-			if(basepath) process.chdir(basepath);
-			require(__dirname+'/lib/main.js');
-		};
+		if(basepath) process.chdir(basepath);
+		require(__dirname+'/lib/main.js');
 	}
-
 };
