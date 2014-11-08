@@ -7,7 +7,7 @@ var fwconfigDefault = require('./lib/default/fwconfig.js');
 
 module.exports = function(fwconfig){
 	// normalize fwconfig
-	utils.deepExtend(fwconfig, fwconfigDefault);
+	fwconfig = utils.deepExtend(fwconfigDefault, fwconfig);
 	var mode = fwconfig.mode;
 
 	// write to env
@@ -42,12 +42,8 @@ module.exports = function(fwconfig){
 			});
 		};
 		createChild();
-	} else if(mode === 'locale') {
-		// locale generation mode
-		require(__dirname+'/lib/gen_locale.js');
 	} else {
 		// limited mode
-		if(basepath) process.chdir(basepath);
 		require(__dirname+'/lib/main.js');
 	}
 };
