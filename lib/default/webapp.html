@@ -12,10 +12,9 @@
 		<img src="~fw/{{loadingLogo}}" alt="" style="display:block;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto">
 	</div>{{/if}}
 	<script fw type="text/javascript">
-		window.fw = { mode:'app', debug:{{debug}}, version:'{{version}}', fwVersion:'{{fwVersion}}', timeout:'{{timeout}}', language:'{{language}}', cacheServer:'', workingServer:'{{workingServer}}'.match(/\S+/g) };
-		for(fw._logo=document.body.childNodes[0]; fw._logo; fw._logo=fw._logo.nextSibling)
-			if(fw._logo.getAttribute && fw._logo.getAttribute('fw') === '') break;
-		if(fw._logo) fw._logo.style.display = 'block';
+window.fw = { mode:'app', debug:{{debug}}, version:'{{version}}', fwVersion:'{{fwVersion}}', timeout:'{{timeout}}', language:'{{language}}', cacheServer:'', workingServer:'{{workingServer}}'.match(/\S+/g) };
+for(fw._logo=document.body.childNodes[0]; fw._logo; fw._logo=fw._logo.nextSibling) if(fw._logo.getAttribute && fw._logo.getAttribute('fw') === '') break;
+if(fw._logo) fw._logo.style.display = 'block';
 	</script>
 	<script fw type="text/javascript" src="~fw/init.js"></script>
 </body>

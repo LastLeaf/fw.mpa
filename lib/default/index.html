@@ -8,7 +8,7 @@
 	{{#if favicon}}<link href="/~fw/{{favicon}}{{#if debug}}?t={{timestamp}}{{else}}?v={{faviconVersion}}{{/if}}" rel="icon" type="image/x-icon">{{/if}}
 	{{{extraHead}}}
 	<script fw type="text/javascript">
-		window.fw = { mode:'web', debug:{{debug}}, version:'{{version}}', fwVersion:'{{fwVersion}}', timeout:'{{timeout}}', auth:'{{auth}}', language:'{{language}}', cacheServer:'{{cacheServer}}'.match(/\S+/g), workingServer:'{{workingServer}}'.match(/\S+/g) };
+window.fw = { mode:'web', debug:{{debug}}, version:'{{version}}', fwVersion:'{{fwVersion}}', timeout:'{{timeout}}', auth:'{{auth}}', language:'{{language}}', cacheServer:'{{cacheServer}}'.match(/\S+/g), workingServer:'{{workingServer}}'.match(/\S+/g) };
 	</script>
 </head>
 <body>
@@ -16,9 +16,8 @@
 		<img src="/~fw/{{loadingLogo}}{{#if debug}}?t={{timestamp}}{{else}}?v={{loadingLogoVersion}}{{/if}}" alt="" style="display:block;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto">
 	</div>
 	<script fw type="text/javascript">
-		for(fw._logo=document.body.childNodes[0]; fw._logo; fw._logo=fw._logo.nextSibling)
-			if(fw._logo.getAttribute && fw._logo.getAttribute('fw') === '') break;
-		if(fw._logo) fw._logo.style.display = 'block';
+for(fw._logo=document.body.childNodes[0]; fw._logo; fw._logo=fw._logo.nextSibling) if(fw._logo.getAttribute && fw._logo.getAttribute('fw') === '') break;
+if(fw._logo) fw._logo.style.display = 'block';
 	</script>{{/if}}
 	<script fw type="text/javascript" src="/~fw/init.js{{#if debug}}?t={{timestamp}}{{else}}?v={{fwVersion}}{{/if}}"></script>
 	{{{content}}}
