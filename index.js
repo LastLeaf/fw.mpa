@@ -21,7 +21,7 @@ module.exports = function(fwconfig){
 			cp.on('exit', function(code, signal){
 				if(code === 250) {
 					// child required a reboot
-					console.log('Will restart soon...');
+					console.log('fw.mpa will restart soon...');
 					setTimeout(createChild, 1000);
 					return;
 				}
