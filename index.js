@@ -10,6 +10,16 @@ module.exports = function(fwconfig){
 	fwconfig = utils.deepExtend(fwconfigDefault, fwconfig);
 	var mode = fwconfig.mode;
 
+	// locale generation mode
+	if(mode === 'locale') {
+		if(!process.argv[2]) {
+			console.log('Usage: FW=LOCALE ' + process.argv[0] + ' SingleLocale [SearchDirectory]');
+			return;
+		}
+		require('./lib/gen_locale')(process.argv[3] || '.', process.argv[2]);
+		return;
+	}
+
 	// write to env
 	process.env.FW = JSON.stringify(fwconfig);
 
