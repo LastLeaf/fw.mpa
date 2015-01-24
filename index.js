@@ -13,7 +13,7 @@ module.exports = function(fwconfig){
 	// locale generation mode
 	if(mode === 'locale') {
 		if(!process.argv[2]) {
-			console.log('Usage: FW=LOCALE ' + process.argv[0] + ' SingleLocale [SearchDirectory]');
+			console.log('Usage: FW=LOCALE ' + process.argv[0] + ' ' + process.argv[1] + ' SingleLocale [SearchDirectory]');
 			return;
 		}
 		require('./lib/gen_locale')(process.argv[3] || '.', process.argv[2]);
