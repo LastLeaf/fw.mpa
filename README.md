@@ -1,5 +1,5 @@
 # fw.mpa #
-_a multi-page web-app and website framework_
+fw:mpa: a multi-page web-app and website framework.
 
 ## Introduction ##
 
@@ -23,6 +23,8 @@ Here is a clear example to show how this page model works.
 * B is also unloaded. `stack: [A]`
 * A is D's parent, so A is not changed. D is loaded and inited, and the whole page is loaded. `stack: [A, D]`
 
+The cooperation of sub-pages in a web page is not defined by the framework. A clear way is that parent/child sub-pages control parent/child nodes in DOM tree.
+
 ### Real-Time Model ###
 
 fw.mpa is a real-time framework. It means that live connections are kept between servers and browsers. There are two ways of communication between servers and browsers: RPC and server events.
@@ -34,21 +36,33 @@ A live connection is built automatically when a sub-page is inited. If disconnec
 
 fw.mpa uses [sockjs](https://github.com/sockjs) as low level connector. It means that Websockets is used when available, and almost all browsers are supported including IE6.
 
-## Guide ##
+## Quick Start ##
 
-1. [Creating New Project](doc/create_project.md)
-1. [Running as a Packaged Web-App](doc/packaged_webapp.md)
-1. [Database Binding](doc/database_binding.md)
+1. [Configuring Framework](doc/start/config_fw.md)
+1. [Basic Directory Binding](doc/start/dir_binding.md)
+1. [Client Coding](doc/start/client.md)
+1. [RPC Functions](doc/start/rpc.md)
+1. [Basic Routing](doc/start/routing.md)
+1. [Simple Example](doc/start/example.md)
+
+## Feature List ##
+
+1. [Framework Initializing](doc/fw.md)
+1. [App Initializing](doc/app.md)
+1. [Database Support](doc/database.md)
 1. [Client Side Code](doc/client.md)
 1. [Routing](doc/routing.md)
-1. [RPC Functions, Server Messages and Server Modules](doc/rpc.md)
-1. [Server-Side Rendering](doc/server_side_rendering.md)
-1. [Special Pages](doc/special_pages.md)
+1. [RPC Functions and Server Messages](doc/rpc.md)
+1. [Server Modules](doc/module.md)
+1. [Server-Side Rendering](doc/render.md)
+1. [Special Pages](doc/page.md)
 1. [I18n Support](doc/i18n.md)
+1. [Running as a Packaged Web-App](doc/packaged_webapp.md)
 
 ## Additional Resource ##
 
-* [Full Configuration and Default Values](lib/default/fwconfig.js)
+* [Full Framework Configuration Options and Default Values](lib/default/fwconfig.js)
+* [Full App Configuration Options and Default Values](lib/default/appconfig.js)
 * [API List](doc/api.md)
 
 # Development Status #
