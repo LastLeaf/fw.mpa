@@ -39,6 +39,7 @@ fw.mpa uses [sockjs](https://github.com/sockjs) as low level connector. It means
 ## Quick Start ##
 
 1. [Configuring Framework](doc/start/config_fw.md)
+1. [Configuring App](doc/start/config_app.md)
 1. [Basic Directory Binding](doc/start/dir_binding.md)
 1. [Client Coding](doc/start/client.md)
 1. [RPC Functions](doc/start/rpc.md)

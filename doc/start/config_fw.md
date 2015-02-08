@@ -1,6 +1,6 @@
 # fw.mpa Quick Start #
 
-## Initializing Framework ##
+## Configuring Framework ##
 
 Install fw.mpa in your project directory using `$ npm install fw.mpa`.
 
