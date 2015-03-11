@@ -38,36 +38,27 @@ fw.mpa uses [sockjs](https://github.com/sockjs) as low level connector. It means
 
 ## Quick Start ##
 
-1. [Configuring Framework](doc/start/config_fw.md)
-1. [Configuring App](doc/start/config_app.md)
-1. [Basic Directory Binding](doc/start/dir_binding.md)
-1. [Client Coding](doc/start/client.md)
-1. [Basic Routing](doc/start/routing.md)
-1. [RPC Functions](doc/start/rpc.md)
-1. [Simple Example](doc/start/example.md)
+1. [Configuring Framework](doc/quick_start/config_fw.md)
+1. [Configuring App](doc/quick_start/config_app.md)
+1. [Basic Directory Binding](doc/quick_start/dir_binding.md)
+1. [Client Coding](doc/quick_start/client.md)
+1. [Basic Routing](doc/quick_start/routing.md)
+1. [RPC Functions](doc/quick_start/rpc.md)
+1. [Running Apps](doc/quick_start/running.md)
 
-## Feature List ##
+## Basic Topics ##
 
-1. [Framework Initializing](doc/fw.md)
-1. [App Initializing](doc/app.md)
-1. [Database Support](doc/database.md)
-1. [Client Side Code](doc/client.md)
-1. [Routing](doc/routing.md)
-1. [RPC Functions and Server Messages](doc/rpc.md)
-1. [Server Modules](doc/module.md)
-1. [Server-Side Rendering](doc/render.md)
-1. [Special Pages](doc/page.md)
-1. [I18n Support](doc/i18n.md)
-1. [Running as a Packaged Web-App](doc/packaged_webapp.md)
+TODO
+
+## Advanced Topics ##
+
+TODO
 
 ## Additional Resource ##
 
 * [Full Framework Configuration Options and Default Values](lib/default/fwconfig.js)
 * [Full App Configuration Options and Default Values](lib/default/appconfig.js)
-* [API List](doc/api.md)
-
-# Development Status #
-fw.mpa is still not stable. See issues if you are interested.
+* API List (TODO)
 
 # LICENSE #
-Copyright 2014 LastLeaf, MIT License.
+Copyright 2014-2015 LastLeaf, MIT License.

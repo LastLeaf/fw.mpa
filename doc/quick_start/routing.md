@@ -8,7 +8,7 @@ Routes contain the sub-page structure and source location. Here's an example:
 module.exports = function(app){
 	// ...
 	// routing
-	app.route.add('/', {
+	app.route.set('/', {
 		style: 'index.css',
 		tmpl: 'index.tmpl',
 		lib: 'libs/jquery.js',
@@ -28,22 +28,22 @@ How about a page containing several sub-pages?
 module.exports = function(app){
 	// ...
 	// routing
-	app.route.add('/', {
+	app.route.set('/', {
 		style: 'index.css',
 		tmpl: 'index.tmpl',
 		lib: 'libs/jquery.js',
 		main: 'index.js',
 		parent: 'body'
 	});
-	app.route.add('/about', {
+	app.route.set('/about', {
 		main: '404.js',
 		parent: 'body'
 	});
-	app.route.add('body', {
+	app.route.set('body', {
 		script: 'body.js',
 		parent: 'global'
 	});
-	app.route.add('global', {
+	app.route.set('global', {
 		style: 'global.css'
 	});
 	// ...
@@ -61,11 +61,11 @@ Variables are also allowed. See the example below.
 module.exports = function(app){
 	// ...
 	// routing
-	app.route.add('/*', {
+	app.route.set('/*', {
 		main: '404.js',
 		parent: 'body'
 	});
-	app.route.add('/user/:id/datails', {
+	app.route.set('/user/:id/datails', {
 		main: '404.js',
 		parent: 'body'
 	});
@@ -75,24 +75,24 @@ module.exports = function(app){
 
 In the second route above, ":id" is a variable. This route matches paths like "/user/ME/details". The variable's value can be visited by `fw.getArgs().id`.
 
-An app may contain a lot of routes. Another API `app.route.addList(...)` is provided, so that you can write your routes in JSON.
+An app may contain a lot of routes. Another API `app.route.setList(...)` is provided, so that you can write your routes in JSON.
 
 ```js
 var routes = {
 	"/": {
-		"style": "index.css",
 		"tmpl": "index.tmpl",
-		"lib": "libs/jquery.js",
 		"main": "index.js",
-		"parent": "body"
-	},
-	"body": {
-		"script": "body.js",
 		"parent": "global"
 	},
-	"global": {}
+	"*": {
+		"main": "404.js"
+	},
+	"global": {
+		"style": "global.css",
+		"main": "global.js"
+	}
 };
 module.exports = function(app){
-	app.route.addList(routes);
+	app.route.setList(routes);
 };
 ```

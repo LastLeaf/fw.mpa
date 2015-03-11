@@ -15,19 +15,25 @@ To call an RPC function, you can use `pg.rpc(path, [args...,] doneCallback, fail
 ```js
 fw.main(function(pg){
 	// sample RPC
+	var a = 6;
+	var b = 3;
 	pg.rpc('/hello/world:divide', a, b, function(res){
 		// called when done
+		document.getElementById('wrapper').innerHTML = pg.tmpl.divideResult({ result: res });
 	}, function(errMessage){
 		// called when error
 	});
 });
 ```
 
-In the example above, "/hello/world:divide" is called.
-You should write this function at "hello/world.js" under rpc directory.
+In the example above, "/helloworld:divide" is called.
+You should write this function at "helloworld.js" under rpc directory.
 
 ```js
-exports.divide(conn, res, a, b){
+exports.divide = function(conn, res, a, b){
+	// Ensure argument types
+	a = Number(a) || 0;
+	b = Number(b) || 0;
 	// return an error when b is 0
 	if(b === 0) res.err('B should not be 0!');
 	// return result

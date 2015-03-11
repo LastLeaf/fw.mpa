@@ -29,6 +29,9 @@ module.exports = function(app){
 			host: '127.0.0.1:1180',
 			title: 'My fw.mpa App',
 		},
+		client: {
+			cache: 'cache',
+		},
 		secret: {
 			cookie: 'LONG RANDOM STRING',
 		}

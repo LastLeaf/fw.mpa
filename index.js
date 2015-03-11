@@ -22,14 +22,13 @@ module.exports = function(fwconfig){
 	process.env.FW = JSON.stringify(fwconfig);
 
 	// start process
-	if(mode === 'debug' || mode === 'cache') {
+	if(mode !== 'run' || mode !== 'limited') {
 		// debug or cache mode
 		var createChild = function(){
 			var cp = childProcess.fork(__dirname+'/lib/main.js');
 			cp.on('exit', function(code, signal){
 				if(code === 250) {
 					// child required a reboot
-					console.log('fw.mpa will restart soon...');
 					setTimeout(createChild, 1000);
 					return;
 				}
