@@ -49,10 +49,11 @@ fw.mpa uses [sockjs](https://github.com/sockjs) as low level connector. It means
 ## Basic Topics ##
 
 * [Multi-Apps in One Instance](doc/basic_topics/multi_apps.md)
-* Client Moduling Suggestions
+* [Client Moduling Suggestions](doc/basic_topics/client_moduling.md)
 * Using Templates
 * I18n Support
 * Sessions and Database Binding
+* Real-Time Server Messages
 * Server Modules
 * Server Side Rendering
 * Special Pages
