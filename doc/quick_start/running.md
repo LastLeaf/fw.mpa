@@ -15,7 +15,7 @@ By default, "debug" mode is used.
 In this mode, lots of debug information will be displayed in node console and browser console.
 Caches are prevented to make coding and debugging easier.
 Most of the time, server-side files are auto-reloaded when they are changed, so you do not need to restart node process when debugging.
-However, sometimes (not always) when you add/remove/rename server-side files, you need to restart node process.
+However, when you modified framework or app start file (e.g. index.js, app.js), you need to restart node process.
 
 "cache" mode is good for building and running on productional servers.
 In this mode, most debug information from framework are depressed.

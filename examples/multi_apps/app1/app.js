@@ -2,18 +2,8 @@
 'use strict';
 
 var routes = {
-	"/": {
-		"tmpl": "index.tmpl",
-		"main": "index.js",
-		"parent": "global"
-	},
 	"*": {
-		"main": "404.js",
-		"parent": "global"
-	},
-	"global": {
-		"style": "global.css",
-		"main": "global.js"
+		"main": "404.js"
 	}
 };
 
@@ -23,10 +13,10 @@ module.exports = function(app){
 	app.setConfig({
 		app: {
 			host: '127.0.0.1:1180',
-			title: 'My fw.mpa App',
+			title: 'App1',
 		},
 		client: {
-			cache: 'cache',
+			cache: __dirname + '/cache',
 		},
 		secret: {
 			cookie: 'LONG RANDOM STRING',
@@ -34,9 +24,7 @@ module.exports = function(app){
 	});
 
 	// binding directory
-	app.bindDir('static', 'static');
-	app.bindDir('client', 'client');
-	app.bindDir('rpc', 'rpc');
+	app.bindDir('client', __dirname + '/client');
 
 	// routing
 	app.route.setList(routes);
