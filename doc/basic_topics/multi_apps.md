@@ -43,7 +43,6 @@ module.exports = function(app){
 };
 ```
 
-
 You can dynamically create a new app with `fw.createApp(startFilePath [, args...] [, cb])`, and destroy an app with `app.destroy()`.
 
 `app.start(cb)`, `app.stop(cb)`, `app.restart(cb)` is designed for start/stop/restart serving.
