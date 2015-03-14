@@ -3,11 +3,14 @@ fw:mpa: a multi-page WebApp and website framework.
 
 ## Introduction ##
 
-fw.mpa is designed to be a real-time web framework suitable for both apps and websites. It minifies the differences of the structure of web-apps (including Cordova apps) and websites.
+fw.mpa is designed to be a real-time web framework suitable for both apps and websites.
+It minifies the differences of the structure of web-apps (including Cordova apps) and websites.
 
-The key idea of this framework is preventing page reloading when page switches. It's slightly similar to _PJAX_, but the framework manages the browser history and providing an page model that is easy to understand.
+The key idea of this framework is preventing page reloading when page switches.
+It's slightly similar to _PJAX_, but the framework manages the browser history and providing an page model that is easy to understand.
 
-Currently, fw.mpa requires node.js on server side, and works on major browsers. It also provides simple database binding, and i18n support.
+Currently, fw.mpa requires node.js on server side, and works on major browsers.
+It also provides simple database binding, and i18n support.
 
 ### Page Model ###
 
@@ -61,7 +64,6 @@ fw.mpa uses [sockjs](https://github.com/sockjs) as low level connector. It means
 
 ## Advanced Topics ##
 
-* Serving Static Directories
 * Advanced Directory Binding
 * RPC from Server Side
 * Client Submodules
