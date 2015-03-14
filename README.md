@@ -64,17 +64,20 @@ fw.mpa uses [sockjs](https://github.com/sockjs) as low level connector. It means
 
 ## Advanced Topics ##
 
+* Version Management
 * Advanced Directory Binding
 * RPC from Server Side
+* Using Relative Paths
 * Client Submodules
 * Advanced Routing
-* Async Client Loading
+* Advanced Client Loading
+* RPC from Forms
 
 ## Additional Resource ##
 
+* [API List](doc/api.md)
 * [Full Framework Configuration Options and Default Values](lib/default/fwconfig.js)
 * [Full App Configuration Options and Default Values](lib/default/appconfig.js)
-* API List
 
 # LICENSE #
 The MIT License (MIT)

@@ -10,6 +10,7 @@ This can be achieved through server modules.
 Server modules are loaded before app accepts requests.
 You can do some async jobs to ensure your low-level service is ready before accepting RPC.
 RPC functions can visit any server modules they need.
+Furthermore, [special pages](special_pages.md) and [server side rendering](rendering.md) code can also visit any server modules.
 
 To write server modules, you should first binding directories where server module files locates.
 Your directory should binded as type "module".

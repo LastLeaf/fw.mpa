@@ -2,6 +2,12 @@
 
 ## Using Templates ##
 
+Templates are used for generating html segments.
+Always using templates when you want to generate html contents.
+They will help avoid XSS attacks.
+
+### Coding Templates ###
+
 Templates included in a sub-page can be visited by "main" scripts in the same sub-page.
 Each template will be converted to a function.
 
@@ -55,3 +61,7 @@ fw.main(function(pg){
 Read [handlebars docs](http://handlebarsjs.com/) for the features of templates. Currently, external helpers are not supported.
 
 "\`" characters are special in fw.mpa templates. Read [I18n Support](i18n.md) for more details.
+
+### Server Side Templates ###
+
+

@@ -64,6 +64,8 @@ app.route.set('*', {
 ```
 
 Now the rendering function will be called when visiting a 404 page.
+The `args` argument above is the map of variables and their values in routes.
+Here, `args['*']` will be the path visiting by user.
 
 If multiple sub-pages in stack need rendering, the rendering function of child sub-pages are always called before their parents.
 It means the parent sub-pages have the abilities to process and integrate the results of their children.

@@ -36,3 +36,7 @@ However, you should read the tips below.
 
 fw.mpa supports a more aggressive moduling strategy called [Client Submodules](../advanced_topics/client_submodules.md).
 It would be quite useful in a complicated system.
+
+### Require-Style Loading ###
+
+
