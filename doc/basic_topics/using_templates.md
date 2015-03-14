@@ -64,4 +64,29 @@ Read [handlebars docs](http://handlebarsjs.com/) for the features of templates. 
 
 ### Server Side Templates ###
 
+Using templates in server code is also allowed, except in server modules.
+However, you should render pages in client side most of the time.
+This feature is mainly designed for generating contents that do not send to clients as RPC response.
 
+You can load a .tmpl file using `fw.tmpl(path)` in server code.
+`path` is relative to the current file.
+Here is an example in RPC functions.
+
+```js
+// RPC: mail.js
+var mail = fw.tmpl('mail.tmpl');
+exports.sendNotice = function(conn, res){
+	mail(conn).notice({ from: 'System admin' }) // => 'System admin send a notice to you!'
+};
+```
+
+The code above loads "mail.tmpl" in the same directory.
+
+```html
+<tmpl id="notice" minify>
+	{{from}} send a notice to you!
+</tmpl>
+```
+
+Take care! The templates loaded by `fw.tmpl(path)` need `conn` as an argument to init templates for the current connection.
+It is a little different from client code.

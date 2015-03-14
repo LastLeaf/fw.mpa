@@ -39,4 +39,25 @@ It would be quite useful in a complicated system.
 
 ### Require-Style Loading ###
 
+fw.mpa support require/exports strategy to modulize scripts.
+In "lib" scripts, you can export interfaces through `fw.exports`, just like you do in node.js.
 
+```js
+(function(){
+	fw.exports.plus = function(a, b){
+		return a+b;
+	};
+	fw.exports.minus = function(a, b){
+		return a-b;
+	};
+})();
+```
+
+In "main" scripts, `pg.lib` is an array of exports from all "lib" scripts in this sub-page.
+Another way to get exports is using `pg.require(path, cb)`.
+`cb` will receive the exports as the first argument.
+
+If you require a script that is not listed in the route, it will be loaded in this sub-page.
+In this way, you can avoid big scripts block the sub-page loading.
+
+You can also require stylesheets and templates into sub-pages, but it is not recommended in most cases.

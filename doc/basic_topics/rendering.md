@@ -66,6 +66,8 @@ app.route.set('*', {
 Now the rendering function will be called when visiting a 404 page.
 The `args` argument above is the map of variables and their values in routes.
 Here, `args['*']` will be the path visiting by user.
+What's more, rendering code can load templates.
+Please using templates to generate html contents.
 
 If multiple sub-pages in stack need rendering, the rendering function of child sub-pages are always called before their parents.
 It means the parent sub-pages have the abilities to process and integrate the results of their children.
@@ -79,7 +81,7 @@ However, when a page switching is triggered and several new sub-pages are loadin
 Consider this: your index sub-page and 404 sub-page are children of global sub-page.
 When a visitor jumps from index to 404, 404 page requires rendering, and you have to handle it on global sub-page!
 
-In this kind of situation, the most-child unchanged sub-page will receive a `render` event, with the render result `childRes` as the first argument.
+In these cases, the most-child unchanged sub-page will receive a `render` event, with the render result `childRes` as the first argument.
 An example to handle this event:
 
 ```js

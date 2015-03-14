@@ -78,13 +78,13 @@ Server side: the `app` object.
 * `app.stop(cb)` Stop serving.
 * `app.restart(cb)` Restart serving.
 * `app.destroy(cb)` Destroy the app. Will stop is before destroy.
-* `app.bindDir()`
-* `app.clearBindings()`
-* `app.setConfig()`
-* `app.route.set()`
-* `app.route.setList()`
-* `app.route.add()`
-* `app.route.clear()`
+* `app.bindDir(type, [prefix,] codeDir)` Bind a directory to a prefix. `prefix` is default to "/". `type` should be one of "client", "module", "page", "render", "rpc", and "static".
+* `app.clearBindings([type])` Clear one type of directory bindings, or clear all directory bindings if `type` is not given.
+* `app.setConfig(configObject)` Set app configuration. The `configObject` will be merged with the existing configuration.
+* `app.route.set([base], routeId, route)` Set a route. `base` is the base path for all relative paths in this route, including routeId.
+* `app.route.setList([base], routeList)` Set a list of routes. `routeList` is a map of routeIds and routes. `base` behaves the same as above.
+* `app.route.add([base], routeId, extraRoute)` Append some scripts, stylesheets, templates, or submodules to a route. The `extraRoute` will be merged with existing route, but single value fields (e.g. "reload") will be ignored.
+* `app.route.clear()` Clear all routes.
 * `app.db` An object for visiting database. It's null if no database is binded.
 
 RPC and server side rendering: the `conn` object (represent a connection from sub-page, a rendering request, or a special page request).
