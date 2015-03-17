@@ -40,7 +40,7 @@ Client side: the sub-page object `pg`.
 * `pg.parent` (Read-Only) The parent sub-page object.
 * `pg.route` (Read-Only) Get the processed route. It may be useful in debugging.
 * `pg.routeId` (Read-Only) Get the route name. This name is normalized by framework. It may be useful for debugging.
-* `pg.rpc(func, [args, ...], [callback, [errorCallback]])` Make an RPC. Server can respond an error through `res.err`. If there's an timeout error, errorCallback is called with no arguments.
+* `pg.rpc(rpcFunc, [args, ...], [callback, [errorCallback]])` Make an RPC. Server can respond an error through `res.err`. If there's an timeout error, `errorCallback` is called with no arguments.
 * `pg.form(form, [readyCallback, [callback, [errorCallback]]])` Send a html form as RPC. &lt;form&gt; should be written in templates with "action" and "method" attributes. "action" and "method" are used to locate the PRC function.
 * `pg.msg(event, func)` Bind a function to a server event.
 * `pg.msgOff(event, func)` Unbind a function from a server event.
@@ -89,7 +89,7 @@ Server side: the `app` object.
 
 RPC and server side rendering: the `conn` object (represent a connection from sub-page, a rendering request, or a special page request).
 
-* `conn.rpc(func, [args, ...], [db])` Make an RPC from server side.
+* `conn.rpc(rpcFunc, [args, ...], [callback, [errorCallback]])` Make an RPC from server side.
 * `conn.msg(event, [args, ...])` Send an event to the sub-page. When reconnected, the conn object is rebuilt, so ALWAYS notify servers to use new conn object when reconnected (considering `socketConnect` event of sub-pages). ONLY available in RPC from clients.
 * `conn.on(event, func)` Bind a function to an event. Currently there's only a `close` event, trigged when connection is closed. ONLY available in RPC from clients.
 * `conn.app` (Read-Only) The app object.

@@ -19,7 +19,7 @@ Most of the time, an extension of the this model would be suitable for your proj
 * Put common headers and footers into "header" sub-pages. You may have several different headers.
 * Put main page content into "content" sub-pages. You may have lots of these sub-pages to show different contents.
 
-Routing in fw-mpa is feature-rich. Read [Advanced Routing](../advanced_topics/advanced_routing.md) if you need some special features.
+Client coding and routing in fw-mpa is feature-rich. Read [Advanced Routing](../advanced_topics/advanced_routing.md) if you need some special features.
 
 ### Modulizing Client Code ###
 

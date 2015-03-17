@@ -45,6 +45,54 @@ module.exports.a.b = function(conn, res, arg){
 };
 ```
 
+Using multi-bindings can also implement middlewares.
+Functions in higher priority bindings can response directly using `res(...)` and `res.err(...)`, or drop to lower priority bindings with `res.next(...)`.
+This can help inject functions to RPC requests in plugin systems.
+
 ### RPC from HTML Forms ###
 
+When submitting forms, you usually love to send through RPC requests.
+Framework provides an API `pg.form(formElem, readyCb, doneCb, errorCb)` to help submit forms.
+The form will be sent as an RPC request.
+Data fields are combined into an JavaScript object, sent as the first argument of the request.
+See the example below.
+
+```html
+<tmpl id="divideForm">
+	<form id="divide" action="/myRpcFile" method="divide">
+		A = <input type="text" name="numA">
+		B = <input type="text" name="numB">
+		<input type="submit" value="Submit">
+	</form>
+</tmpl>
+```
+
+In the form above, the RPC path "/myRpcFile:divide" is written into the form attributes.
+Now insert the form into DOM.
+
+```js
+fw.main(function(pg){
+	document.body.innerHTML = tmpl.divideForm();
+	var form = document.getElementById('divide');
+	pg.form(form, function(){
+		// execute before form submit as RPC request
+		// you can validate form data here
+		// return false if you want to cancel
+	}, function(res){
+		// success, do something here
+	}, function(err){
+		// error, do something here
+	});
+});
+```
+
+Your form data will be extracted from input, select, and textarea elements.
+The values are strings, or an array of strings (if multiple elements have the same name).
+Unchecked checkboxes will not be sent.
+
 ### Server Side RPC ###
+
+You can also make RPC requests from server code.
+The `conn` object provides an API `conn.rpc(rpcPath, [args...,] [cb, [errorCb]])`.
+The argument format is the same as common client side RPC, but server side RPC does not have a timeout.
+Server messages cannot be used when accepting RPC requests from server side.
