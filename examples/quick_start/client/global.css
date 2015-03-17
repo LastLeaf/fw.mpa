@@ -1,0 +1,13 @@
+/* Copyright 2015 LastLeaf, LICENSE: github.lastleaf.me/MIT */
+
+body {
+	margin: 0;
+}
+#wrapper {
+	font-size: 2em;
+	text-align: center;
+}
+.result {
+	color: red;
+	font-weight: bold;
+}

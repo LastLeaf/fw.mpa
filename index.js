@@ -1,50 +1,56 @@
 // Copyright 2014 LastLeaf, LICENSE: github.lastleaf.me/MIT
+'use strict';
 
-var mode = process.env.FW;
+var childProcess = require('child_process');
+var utils = require('./lib/utils.js');
+var fwconfigDefault = require('./lib/default/fwconfig.js');
 
-if(mode === 'DEBUG' || mode === 'CACHE') {
-	// debug or cache mode
-	var childProcess = require('child_process');
-	var createChild = function(){
-		var cp = childProcess.fork(__dirname+'/lib/main.js');
-		cp.on('exit', function(code){
-			if(code === 250) {
-				// child required a reboot
-				console.log('Will restart soon...');
-				setTimeout(createChild, 1000);
-				return;
-			}
-			if(mode === 'DEBUG') {
-				process.exit(code);
-			} else {
-				setTimeout(createChild, 1000);
-			}
-		});
-	};
-	module.exports = function(basepath){
-		if(basepath) process.chdir(basepath);
-		createChild();
-	};
-} else if(mode === 'RUN') {
-	// run mode
-	var childProcess = require('child_process');
-	var createChild = function(){
-		var cp = childProcess.fork(__dirname+'/lib/main.js');
-		cp.on('exit', function(code){
-			setTimeout(createChild, 1000);
-		});
-	};
-	module.exports = function(basepath){
-		if(basepath) process.chdir(basepath);
-		createChild();
-	};
-} else if(mode === 'LOCALE') {
+module.exports = function(fwconfig){
+	// normalize fwconfig
+	fwconfig = utils.deepExtend(fwconfigDefault, fwconfig);
+	var mode = fwconfig.mode;
+
 	// locale generation mode
-	module.exports = require(__dirname+'/lib/gen_locale.js');
-} else {
-	// limited mode
-	module.exports = function(basepath){
-		if(basepath) process.chdir(basepath);
+	if(mode === 'locale') {
+		var locale = (process.env.LANG || '').match(/^[a-z]+(_[A-Z]+)?/);
+		if(!locale) throw(new Error("LANG is not properly set in environment variables."));
+		require('./lib/gen_locale')('.', locale[0]);
+		return;
+	}
+
+	// write to env
+	process.env.FW = JSON.stringify(fwconfig);
+
+	// start process
+	if(mode !== 'run' || mode !== 'limited') {
+		// debug or cache mode
+		var createChild = function(){
+			var cp = childProcess.fork(__dirname+'/lib/main.js');
+			cp.on('exit', function(code, signal){
+				if(code === 250) {
+					// child required a reboot
+					setTimeout(createChild, 1000);
+					return;
+				}
+				if(mode === 'debug') {
+					process.exit(code);
+				} else {
+					setTimeout(createChild, 1000);
+				}
+			});
+		};
+		createChild();
+	} else if(mode === 'run') {
+		// run mode
+		var createChild = function(){
+			var cp = childProcess.fork(__dirname+'/lib/main.js');
+			cp.on('exit', function(code){
+				setTimeout(createChild, 1000);
+			});
+		};
+		createChild();
+	} else {
+		// limited mode
 		require(__dirname+'/lib/main.js');
-	};
-}
+	}
+};

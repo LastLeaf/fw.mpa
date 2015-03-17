@@ -1,13 +1,16 @@
 # fw.mpa #
-_a multi-page web-app and website framework_
+fw:mpa: a multi-page WebApp and website framework.
 
 ## Introduction ##
 
-fw.mpa is designed to be a real-time web framework suitable for both apps and websites. It minifies the differences of the structure of web-apps (including Cordova apps) and websites.
+fw.mpa is designed to be a real-time web framework suitable for both apps and websites.
+It minifies the differences of the structure of web-apps (including Cordova apps) and websites.
 
-The key idea of this framework is preventing page reloading when page switches. It's slightly similar to _PJAX_, but the framework manages the browser history and providing an page model that is easy to understand.
+The key idea of this framework is preventing page reloading when page switches.
+It's slightly similar to _PJAX_, but the framework manages the browser history and providing an page model that is easy to understand.
 
-Currently, fw.mpa requires node.js on server side, and works on major browsers. It also provides simple database binding, and i18n support.
+Currently, fw.mpa requires node.js on server side, and works on major browsers.
+It also provides simple database binding, and i18n support.
 
 ### Page Model ###
 
@@ -23,6 +26,8 @@ Here is a clear example to show how this page model works.
 * B is also unloaded. `stack: [A]`
 * A is D's parent, so A is not changed. D is loaded and inited, and the whole page is loaded. `stack: [A, D]`
 
+The cooperation of sub-pages in a web page is not defined by the framework. A clear way is that parent/child sub-pages control parent/child nodes in DOM tree.
+
 ### Real-Time Model ###
 
 fw.mpa is a real-time framework. It means that live connections are kept between servers and browsers. There are two ways of communication between servers and browsers: RPC and server events.
@@ -34,25 +39,62 @@ A live connection is built automatically when a sub-page is inited. If disconnec
 
 fw.mpa uses [sockjs](https://github.com/sockjs) as low level connector. It means that Websockets is used when available, and almost all browsers are supported including IE6.
 
-## Guide ##
+## Quick Start ##
 
-1. [Creating New Project](doc/create_project.md)
-1. [Running as a Packaged Web-App](doc/packaged_webapp.md)
-1. [Database Binding](doc/database_binding.md)
-1. [Client Side Code](doc/client.md)
-1. [Routing](doc/routing.md)
-1. [RPC Functions, Server Messages and Server Modules](doc/rpc.md)
-1. [Server-Side Rendering](doc/server_side_rendering.md)
-1. [Special Pages](doc/special_pages.md)
-1. [I18n Support](doc/i18n.md)
+1. [Configuring Framework](doc/quick_start/config_fw.md)
+1. [Configuring App](doc/quick_start/config_app.md)
+1. [Basic Directory Binding](doc/quick_start/dir_binding.md)
+1. [Client Coding](doc/quick_start/client.md)
+1. [Basic Routing](doc/quick_start/routing.md)
+1. [RPC Functions](doc/quick_start/rpc.md)
+1. [Running Apps](doc/quick_start/running.md)
+
+## Basic Topics ##
+
+* [Multi-Apps in One Instance](doc/basic_topics/multi_apps.md)
+* [Client Moduling Suggestions](doc/basic_topics/client_moduling.md)
+* [Using Templates](doc/basic_topics/using_templates.md)
+* [I18n Support](doc/basic_topics/i18n.md)
+* [Sessions and Database Binding](doc/basic_topics/database_binding.md)
+* [Real-Time Server Messages](doc/basic_topics/server_messages.md)
+* [Server Modules](doc/basic_topics/server_modules.md)
+* [Special Pages](doc/basic_topics/special_pages.md)
+* [Server Side Rendering](doc/basic_topics/rendering.md)
+* [Packaging WebApps](doc/basic_topics/webapps.md)
+
+## Advanced Topics ##
+
+* [Version Management](doc/advanced_topics/version_management.md)
+* [Advanced Directory Binding](doc/advanced_topics/advanced_dir_binding.md)
+* [Advanced RPC](doc/advanced_topics/advanced_rpc.md)
+* [Client Submodules](doc/advanced_topics/client_submodules.md)
+* [Advanced Routing](doc/advanced_topics/advanced_routing.md)
+* [Client Loading Features](doc/advanced_topics/client_loading.md)
 
 ## Additional Resource ##
 
-* [Full Configuration and Default Values](lib/default/fwconfig.js)
 * [API List](doc/api.md)
-
-# Development Status #
-fw.mpa is still not stable. See issues if you are interested.
+* [Full Framework Configuration Options and Default Values](lib/default/fwconfig.js)
+* [Full App Configuration Options and Default Values](lib/default/appconfig.js)
 
 # LICENSE #
-Copyright 2014 LastLeaf, MIT License.
+The MIT License (MIT)
+
+Copyright 2014-2015 Fu Boquan (LastLeaf), MIT License.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
