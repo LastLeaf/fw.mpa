@@ -23,8 +23,13 @@ A .tmpl file contains one or more templates. An example:
 
 <tmpl id="divideResult" minify>
 	<p>6 / 3 = <span class="result">{{result}}</span></p>
+	<a fw href="/"></a>
 </tmpl>
 ```
+
+If you want the ancher element to be handled by the framework, add an "fw" attribute to it like above.
+You SHOULD add it most of the time, so that the framework can do sub-page switching when clicked.
+If it is not present, a hard page refresh will be triggered.
 
 The "id" is an unique ID to identify the template.
 "minify" is optional. When minify is used, framework will try to minify this template to reduce its code size.
