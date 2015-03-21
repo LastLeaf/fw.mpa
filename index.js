@@ -8,7 +8,7 @@ var fwconfigDefault = require('./lib/default/fwconfig.js');
 module.exports = function(fwconfig){
 	// normalize fwconfig
 	fwconfig = utils.deepExtend(fwconfigDefault, fwconfig);
-	var mode = fwconfig.mode;
+	var mode = fwconfig.mode || fwconfig.defaultMode;
 
 	// locale generation mode
 	if(mode === 'locale') {
