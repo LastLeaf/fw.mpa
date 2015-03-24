@@ -11,7 +11,7 @@ Client side: the `fw` object (window.fw).
 * `fw.getPath()` Get current visiting path.
 * `fw.go(where)` Switch page. If `where` is an address, just switch to it. If `where` is a number (+/-n), go fore/back n steps in browser history. Return whether success.
 * `fw.redirect(address)` Redirect to another address. This will not leave current address in the history. Return whether success.
-* `fw.open(address)` Open address in another window or tab. 
+* `fw.open(address)` Open address in another window or tab.
 * `fw.isLoading()` Return loading status.
 * `fw.stopLoading()` Stop loading current page.
 * `fw.uuid()` Generate an UUID.
@@ -34,7 +34,7 @@ Client side: the sub-page object `pg`.
 * `pg.subm` (Read-Only) An array of submodule objects loaded in this sub-page.
 * `pg.tmpl` (Read-Only) The templates. It's a hash from tmpl ID to Handlebars rendering functions (and json objects in the tmpl file).
 * `pg.tmpl.i18n(text)` The i18n function, translating the provided text.
-* `pg.require(path, cb)` Load a script, stylesheet, template file, or submodule into this sub-page. The exports, templates, or submodule object will be passed to `cb` as the first argument.  
+* `pg.require(path, cb)` Load a script, stylesheet, template file, or submodule into this sub-page. The exports, templates, or submodule object will be passed to `cb` as the first argument.
 * `pg.readyState` (Read-Only) The ready state of this page.
 * `pg.destroyed` (Read-Only) Whether this page is destroyed. Remember to check it in async callbacks!
 * `pg.parent` (Read-Only) The parent sub-page object.
@@ -47,13 +47,16 @@ Client side: the sub-page object `pg`.
 * `pg.on(event, func)` Bind a function to an event. The available events are listed below.
 * Event `childLoadStart` The child sub-page is about to be loaded. Always triggered before child's `load`.
 * Event `render` The child is rendered. Trigged when server rendering is needed by descendants (before its `load`). The binded function receives an argument representing the rendering result.
-* Event `load` The page is successfully loaded. Triggered after main functions.
+* Event `load` The sub-page is successfully loaded. Triggered after main functions.
 * Event `childLoadEnd` The child sub-page is loaded. Always triggered after child's `load`.
 * Event `childLoadStop` The child sub-page loading is aborted.
 * Event `socketConnect` A new connection is built for this sub-page. Always triggered after `load`.
 * Event `socketDisconnect` The connection is lost. Some server events may not be received, so you may have to check something when `socketConnect` is triggered again.
-* Event `unload` The page is unloaded. NOT triggered when the page is hard reload or left. NOT suggested to use (use parent's `childUnload` instead).
+* Event `beforeUnload` The sub-page is requested to unloaded. You can use `fw.stopLoading()` to abort the unload progress. NOT triggered when the page is refreshed or closed.
+* Event `unload` The sub-page is unloaded. NOT triggered when the page is refreshed or closed.
 * Event `childUnload` The child sub-page is unloaded. Always triggered after child's `unload`.
+* Event `pageUnload` The whole page is about to be refreshed or closed. NOT ensured to be triggered (not triggered in some browsers or when crashed). Some DOM features are not usable ([details](https://developer.mozilla.org/en-US/docs/Web/Events/unload)).
+* Event `pageBeforeUnload` The whole page is requested to be refreshed or closed. A message can be displayed. Set `e.message` to the message string if needed, while `e` is the first argument received by the binded function. In some browsers this string will be replaced to another string. NOT ensured to be triggered (not triggered in some browsers or when crashed).
 
 ### Server Side API ###
 
@@ -66,7 +69,7 @@ Server side: the `fw` object (global.fw).
 * `fw.tmpl(file)` Load a template file. ONLY available while framework initialing, so call it at the beginning of files. The file path is relative to `fw.currentLoading`. It returns templates constructor which requires an `conn` object as the first argument to create templates. The templates containing all template functions (and json objects in the tmpl file). The i18n function is also provided.
 * `fw.module(name)` Get a server module. Returns the return value of the specified server module. ONLY available while framework initialing (as above), so call it at the beginning of files.
 * `fw.restart()` Restart framework. Cannot be used in "limited" running mode.
-* `fw.createApp(appStartFile [, args...], cb)` Create a new app. Arguments are allowed to be sent to new app. 
+* `fw.createApp(appStartFile [, args...], cb)` Create a new app. Arguments are allowed to be sent to new app.
 
 Server side: the `app` object.
 

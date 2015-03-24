@@ -72,7 +72,7 @@ Besides common routing fields including "lib", "main", "parent", "style", "subm"
 
 "lib", "main", "style", "subm", and "tmpl" allow multiple values.
 Writing values in an array should works, and `app.route.add([base,] routeId, route)` can append values to these fields.
-What's more, you can select files with `userAgent`.
+What's more, you can select files with `userAgent` and `userAgentNot`.
 An example with all fields:
 
 ```js
@@ -80,10 +80,10 @@ app.route.set('global', {
 	style: ['reset.css', 'global.css'],
 	lib: [{
 			src: '/lib/jquery-1.11.1',
-			userAgent: 'MSIE (6|7|8)\.'
+			userAgent: 'MSIE (6|7|8)\\\.'
 		}, {
 			src: '/lib/jquery-2.1.1',
-			userAgent: '^.*(?!MSIE (6|7|8)\.)'
+			userAgentNot: 'MSIE (6|7|8)\\\.'
 		}]
 });
 app.route.set('*', {
