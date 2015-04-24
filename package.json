@@ -1,10 +1,10 @@
 {
 	"name": "fw.mpa",
-	"version": "0.5.0",
+	"version": "0.5.1",
 	"engines": { "node": ">=0.10.0" },
 	"homepage": "https://github.com/LastLeaf/fw.mpa",
 	"repository": { "type": "git", "url": "https://github.com/LastLeaf/fw.mpa.git" },
-	"License": "MIT",
+	"license": "MIT",
 	"dependencies": {
 		"watchr": "^2.4.11",
 		"mkdirp": "~0.3.5",
