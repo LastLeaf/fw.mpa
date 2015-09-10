@@ -65,7 +65,7 @@ You can show a popup in the script.
 
 ### Special Routing Fields ###
 
-Besides common routing fields including "lib", "main", "parent", "style", "subm", "tmpl", and "base" (we mentioned above), some special fields are also allowed.
+Besides common routing fields including "lib", "main", "page", "parent", "render", "style", "subm", "tmpl", and "base" (we mentioned above), some special fields are also allowed.
 
 * "redirect" field allow an auto-switching to another path.
 * "reload" field force a page refresh when loading/unloading a sub-page. Possible values are "in" (when loading), "out" (when unloading), and "both".

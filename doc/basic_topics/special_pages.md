@@ -23,6 +23,14 @@ module.export = function(req, res){
 };
 ```
 
+Then add it to routes
+
+```js
+app.route.set('/feed/posts', {
+	page: '/feed/posts'
+});
+```
+
 The example above can be visited from the path "/feed/posts" under the app hosts.
 All method, including "POST", "PUT", and even "OPTIONS" are all redirected to this special page.
 Query strings are also allowed.
