@@ -53,11 +53,32 @@ In "lib" scripts, you can export interfaces through `fw.exports`, just like you 
 })();
 ```
 
+In "main" scripts, you should export by returning it.
+
+```js
+// in sync main
+fw.main(function(pg, subm){
+	return {
+		plus: function(){ return a+b }
+	};
+});
+
+// in async main
+fw.mainAsync(function(pg, subm, cb){
+	cb({
+		plus: function(){ return a+b }
+	});
+});
+```
+
 In "main" scripts, `pg.lib` is an array of exports from all "lib" scripts in this sub-page.
-Another way to get exports is using `pg.require(path, cb)`.
+Another way to get exports is using `pg.require(path, cb)` or `pg.import(path)`.
 `cb` will receive the exports as the first argument.
 
 If you require a script that is not listed in the route, it will be loaded in this sub-page.
 In this way, you can avoid big scripts block the sub-page loading.
+
+`pg.import(path)` method is the sync way to load preloaded scripts or submodules in this sub-page.
+You could also get the exports from ancestor sub-pages through `pg.importAncestor(routeId)`.
 
 You can also require stylesheets and templates into sub-pages, but it is not recommended in most cases.

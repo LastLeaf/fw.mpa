@@ -35,6 +35,8 @@ Client side: the sub-page object `pg`.
 * `pg.tmpl` (Read-Only) The templates. It's a hash from tmpl ID to Handlebars rendering functions (and json objects in the tmpl file).
 * `pg.tmpl.i18n(text)` The i18n function, translating the provided text.
 * `pg.require(path, cb)` Load a script, stylesheet, template file, or submodule into this sub-page. The exports, templates, or submodule object will be passed to `cb` as the first argument.
+* `pg.import(path)` Return the exports from a script or submodule. The submodule should be defined in the route of the current sub-page.
+* `pg.importAncestor(routeId)` Return the exports from an ancestor sub-page.
 * `pg.readyState` (Read-Only) The ready state of this page.
 * `pg.destroyed` (Read-Only) Whether this page is destroyed. Remember to check it in async callbacks!
 * `pg.parent` (Read-Only) The parent sub-page object.
